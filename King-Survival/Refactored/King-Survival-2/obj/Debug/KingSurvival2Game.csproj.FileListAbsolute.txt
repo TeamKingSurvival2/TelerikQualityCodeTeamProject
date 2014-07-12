@@ -1,0 +1,5 @@
+E:\GitHub_Projects\KPK_Team_Project\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.exe
+E:\GitHub_Projects\KPK_Team_Project\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.pdb
+E:\GitHub_Projects\KPK_Team_Project\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\KingSurvival2Game.csprojResolveAssemblyReference.cache
+E:\GitHub_Projects\KPK_Team_Project\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\ConsoleApplication1.exe
+E:\GitHub_Projects\KPK_Team_Project\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\ConsoleApplication1.pdb
