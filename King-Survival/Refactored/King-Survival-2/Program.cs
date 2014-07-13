@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApplication1
-{
-    class Program
-    {
-        static void Main2(string[] args)
-        {
-        }
-    }
-}
-
-
-
-//tva e vtorata versiq na proekta mi
-//znam che vs e v edin klas, no nai-vajnoto e che raboti!!!!!!!!!!!!!
+﻿// <copyright file="Program.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+// <author>King Survival 2 Team</author>
 
 namespace KingSurvivalGame
 {
-    class KingSurvivalGame
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// contains the refactored King Survival Game (work in progress)
+    /// </summary>
+    public class KingSurvivalGame
     {
-        static char[,] dyska = 
+        /// <summary>
+        /// game board as two-dimensional char array
+        /// </summary>
+        static char[,] board = 
         {
                                     
             {'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R'},
@@ -40,15 +34,24 @@ namespace KingSurvivalGame
             {'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R'},
         };
 
-        static int[,] ygliNaDyskata = 
+        /// <summary>
+        /// coordinates of board corners
+        /// </summary>
+        static int[,] boardCorners = 
         {
             { 2 , 4 } , { 2 , 18 } , { 9 , 4 } , { 9 , 18 }
             
         };
 
-        static int[] poziciqCar = { 9 , 10 };
+        /// <summary>
+        /// coordinates of king position
+        /// </summary>
+        static int[] kingPosition = { 9 , 10 };
 
-        static int[,] PoziciqPeshki = 
+        /// <summary>
+        /// coordinates of pawn positions (2-dimensional array)
+        /// </summary>
+        static int[,] pawnPositions = 
         {
             { 2 , 4 } , { 2 , 8 } , { 2 , 12 }, { 2 , 16 }
             
@@ -79,9 +82,9 @@ namespace KingSurvivalGame
         static bool proverka ( int[] positionCoodinates)
         {
             int positonRow = positionCoodinates[0];
-            bool isRowInBoard = (positonRow >= ygliNaDyskata[0, 0]) && (positonRow <= ygliNaDyskata[3, 0]);
+            bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
             int positonCol = positionCoodinates[1];
-            bool isColInBoard = (positonCol >= ygliNaDyskata[0, 1]) && (positonCol <= ygliNaDyskata[3, 1]);
+            bool isColInBoard = (positonCol >= boardCorners[0, 1]) && (positonCol <= boardCorners[3, 1]);
             return isRowInBoard && isColInBoard;
         }
 
@@ -90,9 +93,9 @@ namespace KingSurvivalGame
             //tova printira prazen red na konzolata
             Console.WriteLine();
             //tuka kato cqlo si pravq nekvi shareniiki
-            for (int row = 0; row < dyska.GetLength(0); row++)
+            for (int row = 0; row < board.GetLength(0); row++)
             {
-                for (int col = 0; col < dyska.GetLength(1); col++)
+                for (int col = 0; col < board.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
                     bool isCellIn = proverka(coordinates);
@@ -107,44 +110,44 @@ namespace KingSurvivalGame
                                 //tva go prai cherno
                                 Console.ForegroundColor = ConsoleColor.Black;
                                 //i stignaxme nai posle do printiraneto na elementa
-                                Console.Write(dyska[row, col]);
+                                Console.Write(board[row, col]);
                                 Console.ResetColor();
                             }
                             else if (col % 2 == 0)
                             {
                                 Console.BackgroundColor = ConsoleColor.Blue;
                                 Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(dyska[row, col]);
+                                Console.Write(board[row, col]);
                                 Console.ResetColor();
                             }
                             else if (col % 2 != 0)
                             {
-                                Console.Write(dyska[row, col]);
+                                Console.Write(board[row, col]);
                             }
                         }
                         else if (col % 4 == 0)
                         {
                             Console.BackgroundColor = ConsoleColor.Blue;
                             Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(dyska[row, col]);
+                            Console.Write(board[row, col]);
                             Console.ResetColor();
                         }
                         else if (col % 2 == 0)
 	                    {
                             Console.BackgroundColor = ConsoleColor.Green;
                             Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(dyska[row, col]);
+                            Console.Write(board[row, col]);
                             Console.ResetColor();
 	                    }
                                 
                         else if (col % 2 != 0)
                         {
-                            Console.Write(dyska[row, col]);
+                            Console.Write(board[row, col]);
                         }
                     }
                     else
                     {
-                        Console.Write(dyska[row, col]);  
+                        Console.Write(board[row, col]);  
                     }
                     
                 }
@@ -359,10 +362,10 @@ namespace KingSurvivalGame
                         {
 
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[0,0];
+                            oldCoordinates[0] = pawnPositions[0,0];
 
 
-                            oldCoordinates[1] = PoziciqPeshki[0, 1];
+                            oldCoordinates[1] = pawnPositions[0, 1];
 
 
                             int[] coords = new int[2];
@@ -370,25 +373,25 @@ namespace KingSurvivalGame
                             if (coords != null)
                             {
 
-                                PoziciqPeshki[0,0]= coords[0];
-                                PoziciqPeshki[0, 1] = coords[1];
+                                pawnPositions[0,0]= coords[0];
+                                pawnPositions[0, 1] = coords[1];
                             }
                         }
                         else 
                         {
                             //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[0, 0];
+                            oldCoordinates[0] = pawnPositions[0, 0];
 
-                            oldCoordinates[1] = PoziciqPeshki[0, 1];
+                            oldCoordinates[1] = pawnPositions[0, 1];
                             int[] coords = new int[2];
 
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
                             if (coords != null)
                             {
-                                PoziciqPeshki[0, 0] = coords[0];
+                                pawnPositions[0, 0] = coords[0];
 
-                                PoziciqPeshki[0, 1] = coords[1];
+                                pawnPositions[0, 1] = coords[1];
                             }
                         }
                         return true;
@@ -397,8 +400,8 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[1,0];
-                            oldCoordinates[1] = PoziciqPeshki[1, 1];
+                            oldCoordinates[0] = pawnPositions[1,0];
+                            oldCoordinates[1] = pawnPositions[1, 1];
 
                             int[] coords = new int[2];
 
@@ -407,11 +410,11 @@ namespace KingSurvivalGame
                             {
 
 
-                                PoziciqPeshki[1, 0] = coords[0];
+                                pawnPositions[1, 0] = coords[0];
 
 
 
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 1] = coords[1];
 
                             }
                         }
@@ -420,20 +423,20 @@ namespace KingSurvivalGame
                             //=='D'
                             int[] oldCoordinates = new int[2];
 
-                            oldCoordinates[0] = PoziciqPeshki[1, 0];
+                            oldCoordinates[0] = pawnPositions[1, 0];
 
 
 
-                            oldCoordinates[1] = PoziciqPeshki[1, 1];
+                            oldCoordinates[1] = pawnPositions[1, 1];
 
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
                             if (coords != null)
                             {
-                                PoziciqPeshki[1, 0] = coords[0];
+                                pawnPositions[1, 0] = coords[0];
 
 
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 1] = coords[1];
                             }
                         }
                         return true;
@@ -442,30 +445,30 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[2,0];
+                            oldCoordinates[0] = pawnPositions[2,0];
 
 
-                            oldCoordinates[1] = PoziciqPeshki[2, 1];
+                            oldCoordinates[1] = pawnPositions[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
                             if (coords != null)
                             {
-                                PoziciqPeshki[2, 0] = coords[0];
-                                PoziciqPeshki[2, 1] = coords[1];
+                                pawnPositions[2, 0] = coords[0];
+                                pawnPositions[2, 1] = coords[1];
                             }
                         }
                         else 
                         {
                             //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[2, 0];
-                            oldCoordinates[1] = PoziciqPeshki[2, 1];
+                            oldCoordinates[0] = pawnPositions[2, 0];
+                            oldCoordinates[1] = pawnPositions[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
                             if (coords != null)
                             {
-                                PoziciqPeshki[1, 0] = coords[0];
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 0] = coords[0];
+                                pawnPositions[1, 1] = coords[1];
                             }
                         }
                         return true;
@@ -474,28 +477,28 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[3,0];
-                            oldCoordinates[1] = PoziciqPeshki[3, 1];
+                            oldCoordinates[0] = pawnPositions[3,0];
+                            oldCoordinates[1] = pawnPositions[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
                             if (coords != null)
                             {
-                                PoziciqPeshki[3, 0] = coords[0];
-                                PoziciqPeshki[3, 1] = coords[1];
+                                pawnPositions[3, 0] = coords[0];
+                                pawnPositions[3, 1] = coords[1];
                             }
                         }
                         else 
                         {
                             //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[3, 0];
-                            oldCoordinates[1] = PoziciqPeshki[3, 1];
+                            oldCoordinates[0] = pawnPositions[3, 0];
+                            oldCoordinates[1] = pawnPositions[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords != null)
                             {
-                                PoziciqPeshki[3, 0] = coords[0];
-                                PoziciqPeshki[3, 1] = coords[1];
+                                pawnPositions[3, 0] = coords[0];
+                                pawnPositions[3, 1] = coords[1];
                             }
                         }
                         return true;
@@ -506,27 +509,27 @@ namespace KingSurvivalGame
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = checkNextKingPosition(oldCoordinates, 'U', 'L');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             else
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = checkNextKingPosition(oldCoordinates, 'U', 'R');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             return true;
@@ -537,28 +540,28 @@ namespace KingSurvivalGame
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = checkNextKingPosition(oldCoordinates, 'D', 'L');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             else
                             {
                                 //==KDD
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = checkNextKingPosition(oldCoordinates, 'D', 'R');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             return true;
@@ -646,11 +649,11 @@ namespace KingSurvivalGame
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
-                    char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                    dyska [currentCoordinates[0] , currentCoordinates[1]] = ' ';
-                    dyska[newCoords[0], newCoords[1]] = sign;
+                    char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                    board [currentCoordinates[0] , currentCoordinates[1]] = ' ';
+                    board[newCoords[0], newCoords[1]] = sign;
                     movementsCounter++;
                     switch (currentPawn)
                     {
@@ -780,11 +783,11 @@ namespace KingSurvivalGame
         	{
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
-                    char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                    dyska[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                    dyska[newCoords[0], newCoords[1]] = sign;
+                    char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                    board[currentCoordinates[0], currentCoordinates[1]] = ' ';
+                    board[newCoords[0], newCoords[1]] = sign;
                     movementsCounter++;
                     switch (currentPawn)
                     {
@@ -928,11 +931,11 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                        dyska[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        dyska[newCoords[0], newCoords[1]] = sign;
+                        char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                        board[currentCoordinates[0], currentCoordinates[1]] = ' ';
+                        board[newCoords[0], newCoords[1]] = sign;
                         movementsCounter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -968,11 +971,11 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                        dyska[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        dyska[newCoords[0], newCoords[1]] = sign;
+                        char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                        board[currentCoordinates[0], currentCoordinates[1]] = ' ';
+                        board[newCoords[0], newCoords[1]] = sign;
                         movementsCounter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -1011,11 +1014,11 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                        dyska[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        dyska[newCoords[0], newCoords[1]] = sign;
+                        char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                        board[currentCoordinates[0], currentCoordinates[1]] = ' ';
+                        board[newCoords[0], newCoords[1]] = sign;
                         movementsCounter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -1051,11 +1054,11 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (proverka(newCoords) && dyska[newCoords[0], newCoords[1]] == ' ')
+                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = dyska[currentCoordinates[0], currentCoordinates[1]];
-                        dyska[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        dyska[newCoords[0], newCoords[1]] = sign;
+                        char sign = board[currentCoordinates[0], currentCoordinates[1]];
+                        board[currentCoordinates[0], currentCoordinates[1]] = ' ';
+                        board[newCoords[0], newCoords[1]] = sign;
                         movementsCounter++;
                         for (int i = 0; i < 4; i++)
                         {
