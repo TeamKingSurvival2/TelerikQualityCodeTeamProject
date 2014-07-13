@@ -17,7 +17,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// game board as two-dimensional char array
         /// </summary>
-        static char[,] board = 
+        private static char[,] board = 
         {                                    
             { 'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R' },
             { ' ', ' ', ' ', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', ' ', ' ', ' ' },
@@ -36,7 +36,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// coordinates of board corners
         /// </summary>
-        static int[,] boardCorners = 
+        private static int[,] boardCorners = 
         {
             { 2, 4 }, 
             { 2, 18 }, 
@@ -47,40 +47,65 @@ namespace KingSurvivalGame
         /// <summary>
         /// coordinates of king position
         /// </summary>
-        static int[] kingPosition = { 9, 10 };
+        private static int[] kingPosition = { 9, 10 };
 
         /// <summary>
         /// coordinates of pawn positions (2-dimensional array)
         /// </summary>
-        static int[,] pawnPositions = 
+        private static int[,] pawnPositions = 
         {
-            { 2 , 4 } , { 2 , 8 } , { 2 , 12 }, { 2 , 16 }
-            
+            { 2, 4 }, 
+            { 2, 8 }, 
+            { 2, 12 }, 
+            { 2, 16 }            
         };
 
-        static bool[] kingExistingMoves = { true, true, true, true };
+        /// <summary>
+        /// existing moves for the king
+        /// </summary>
+        private static bool[] kingExistingMoves = { true, true, true, true };
 
-        static bool[,] pawnExistingMoves = 
+        /// <summary>
+        /// existing moves for pawns
+        /// </summary>
+        private static bool[,] pawnExistingMoves = 
         {
-            { true, true } , { true, true } , { true, true }, { true, true }
-            
+            { true, true }, 
+            { true, true }, 
+            { true, true },
+            { true, true }            
         };
 
-        static string[] validKingInputs = { "KUL", "KUR", "KDL", "KDR" };
+        /// <summary>
+        /// contains all valid input strings for the king
+        /// </summary>
+        private static string[] validKingInputs = { "KUL", "KUR", "KDL", "KDR" };
 
-        static string[] validAPawnInputs = { "ADL", "ADR" };
+        /// <summary>
+        /// contains all valid input strings for pawn A
+        /// </summary>
+        private static string[] validAPawnInputs = { "ADL", "ADR" };
 
-        static string[] validBPawnInputs = { "BDL", "BDR" };
+        /// <summary>
+        /// contains all valid input strings for pawn B
+        /// </summary>
+        private static string[] validBPawnInputs = { "BDL", "BDR" };
 
-        static string[] validCPawnInputs = { "CDL", "CDR" };
+        /// <summary>
+        /// contains all valid input strings for pawn C
+        /// </summary>
+        private static string[] validCPawnInputs = { "CDL", "CDR" };
 
-        static string[] validDPawnInputs = { "DDL", "DDR" };
+        /// <summary>
+        /// contains all valid input strings for pawn D
+        /// </summary>
+        private static string[] validDPawnInputs = { "DDL", "DDR" };
 
-        static int movementsCounter = 0;
+        private static int movementsCounter = 0;
 
-        static bool gameIsFinished = false;
+        private static bool gameIsFinished = false;
 
-        static bool proverka(int[] positionCoodinates)
+        private static bool proverka(int[] positionCoodinates)
         {
             int positonRow = positionCoodinates[0];
             bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
@@ -138,7 +163,6 @@ namespace KingSurvivalGame
                             Console.Write(board[row, col]);
                             Console.ResetColor();
                         }
-
                         else if (col % 2 != 0)
                         {
                             Console.Write(board[row, col]);
@@ -148,11 +172,12 @@ namespace KingSurvivalGame
                     {
                         Console.Write(board[row, col]);
                     }
-
                 }
+
                 Console.WriteLine();
                 Console.ResetColor();
             }
+
             Console.WriteLine();
         }
 
@@ -197,6 +222,7 @@ namespace KingSurvivalGame
                         equal[i] = 1;
                     }
                 }
+
                 bool hasAnEqual = false;
                 for (int i = 0; i < 4; i++)
                 {
@@ -205,12 +231,14 @@ namespace KingSurvivalGame
                         hasAnEqual = true;
                     }
                 }
+
                 if (!hasAnEqual)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid command name!");
                     Console.ResetColor();
                 }
+
                 return hasAnEqual;
             }
             else
@@ -234,6 +262,7 @@ namespace KingSurvivalGame
                                 equal[i] = 1;
                             }
                         }
+
                         for (int i = 0; i < 2; i++)
                         {
                             if (equal[i] == 1)
@@ -241,12 +270,14 @@ namespace KingSurvivalGame
                                 hasAnEqual = true;
                             }
                         }
+
                         if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
+
                         return hasAnEqual;
 
                     case 'B':
@@ -263,6 +294,7 @@ namespace KingSurvivalGame
                                 equal[i] = 1;
                             }
                         }
+
                         for (int i = 0; i < 2; i++)
                         {
                             if (equal[i] == 1)
@@ -270,12 +302,14 @@ namespace KingSurvivalGame
                                 hasAnEqual = true;
                             }
                         }
+
                         if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
+
                         return hasAnEqual;
                     case 'C':
                         for (int i = 0; i < validCPawnInputs.Length; i++)
@@ -291,6 +325,7 @@ namespace KingSurvivalGame
                                 equal[i] = 1;
                             }
                         }
+
                         for (int i = 0; i < 2; i++)
                         {
                             if (equal[i] == 1)
@@ -298,12 +333,14 @@ namespace KingSurvivalGame
                                 hasAnEqual = true;
                             }
                         }
+
                         if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
+
                         return hasAnEqual;
 
                     case 'D':
