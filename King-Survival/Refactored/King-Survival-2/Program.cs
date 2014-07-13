@@ -103,6 +103,9 @@ namespace KingSurvivalGame
 
         private static int movementsCounter = 0;
 
+        /// <summary>
+        /// holds game completion state
+        /// </summary>
         private static bool gameIsFinished = false;
 
         private static bool proverka(int[] positionCoodinates)
@@ -184,8 +187,8 @@ namespace KingSurvivalGame
         static void InteractWithUser(int moveCounter)
         {
             if (gameIsFinished)
-            {//igrata svyrshi
-                Console.WriteLine("Game is finished!");
+            {
+                Console.WriteLine("G-A-M-E- -O-V-E-R");
                 return;
             }
             else
@@ -201,7 +204,6 @@ namespace KingSurvivalGame
                     ProcessPawnSide();
                 }
             }
-
         }
 
         static bool proverka2(string checkedString)
@@ -392,23 +394,16 @@ namespace KingSurvivalGame
                 switch (startLetter)
                 {
                     case 'A':
-
-
                         if (checkedInput[2] == 'L')
                         {
-
                             int[] oldCoordinates = new int[2];
                             oldCoordinates[0] = pawnPositions[0, 0];
-
-
                             oldCoordinates[1] = pawnPositions[0, 1];
-
 
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
                             if (coords != null)
                             {
-
                                 pawnPositions[0, 0] = coords[0];
                                 pawnPositions[0, 1] = coords[1];
                             }
@@ -444,14 +439,8 @@ namespace KingSurvivalGame
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
                             if (coords != null)
                             {
-
-
                                 pawnPositions[1, 0] = coords[0];
-
-
-
                                 pawnPositions[1, 1] = coords[1];
-
                             }
                         }
                         else
@@ -548,7 +537,7 @@ namespace KingSurvivalGame
                                 oldCoordinates[0] = kingPosition[0];
                                 oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'U', 'L');
+                                coords = CheckNextKingPosition(oldCoordinates, 'U', 'L');
                                 if (coords != null)
                                 {
                                     kingPosition[0] = coords[0];
@@ -561,7 +550,7 @@ namespace KingSurvivalGame
                                 oldCoordinates[0] = kingPosition[0];
                                 oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'U', 'R');
+                                coords = CheckNextKingPosition(oldCoordinates, 'U', 'R');
                                 if (coords != null)
                                 {
                                     kingPosition[0] = coords[0];
@@ -579,7 +568,7 @@ namespace KingSurvivalGame
                                 oldCoordinates[0] = kingPosition[0];
                                 oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'D', 'L');
+                                coords = CheckNextKingPosition(oldCoordinates, 'D', 'L');
                                 if (coords != null)
                                 {
                                     kingPosition[0] = coords[0];
@@ -593,13 +582,14 @@ namespace KingSurvivalGame
                                 oldCoordinates[0] = kingPosition[0];
                                 oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'D', 'R');
+                                coords = CheckNextKingPosition(oldCoordinates, 'D', 'R');
                                 if (coords != null)
                                 {
                                     kingPosition[0] = coords[0];
                                     kingPosition[1] = coords[1];
                                 }
                             }
+
                             return true;
                         }
                     default:
@@ -608,7 +598,8 @@ namespace KingSurvivalGame
             }
             else
             {
-                return false;//message is from other
+                return false;
+                ////message is from other
             }
         }
 
@@ -953,7 +944,7 @@ namespace KingSurvivalGame
 
         }
 
-        static int[] checkNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
+        static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
@@ -977,6 +968,7 @@ namespace KingSurvivalGame
                         {
                             kingExistingMoves[i] = true;
                         }
+
                         checkForKingExit(newCoords[0]);
                         return newCoords;
                     }
@@ -991,12 +983,14 @@ namespace KingSurvivalGame
                                 allAreFalse = false;
                             }
                         }
+
                         if (allAreFalse)
                         {
                             gameIsFinished = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
+
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("You can't go in this direction! ");
                         Console.ResetColor();
@@ -1017,6 +1011,7 @@ namespace KingSurvivalGame
                         {
                             kingExistingMoves[i] = true;
                         }
+
                         checkForKingExit(newCoords[0]);
                         return newCoords;
                     }
@@ -1031,12 +1026,14 @@ namespace KingSurvivalGame
                                 allAreFalse = false;
                             }
                         }
+
                         if (allAreFalse)
                         {
                             gameIsFinished = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
+
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("You can't go in this direction! ");
                         Console.ResetColor();
@@ -1060,6 +1057,7 @@ namespace KingSurvivalGame
                         {
                             kingExistingMoves[i] = true;
                         }
+
                         checkForKingExit(newCoords[0]);
                         return newCoords;
                     }
@@ -1074,12 +1072,14 @@ namespace KingSurvivalGame
                                 allAreFalse = false;
                             }
                         }
+
                         if (allAreFalse)
                         {
                             gameIsFinished = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
+
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("You can't go in this direction! ");
                         Console.ResetColor();
@@ -1100,6 +1100,7 @@ namespace KingSurvivalGame
                         {
                             kingExistingMoves[i] = true;
                         }
+
                         checkForKingExit(newCoords[0]);
                         return newCoords;
                     }
@@ -1114,12 +1115,14 @@ namespace KingSurvivalGame
                                 allAreFalse = false;
                             }
                         }
+
                         if (allAreFalse)
                         {
                             gameIsFinished = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
+
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("You can't go in this direction! ");
                         Console.ResetColor();
