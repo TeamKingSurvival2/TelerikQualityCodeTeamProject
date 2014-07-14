@@ -401,7 +401,12 @@ namespace KingSurvivalGame
             return true;
         }
 
-        private static bool proverkaIProcess(string checkedInput)
+        /// <summary>
+        /// validates turn and executes it
+        /// </summary>
+        /// <param name="checkedInput">input parameter</param>
+        /// <returns>a boolean true/false value</returns>
+        private static bool checkAndExecuteTurn(string checkedInput)
         {
             bool commandNameIsOK = proverka2(checkedInput);
             if (commandNameIsOK)
@@ -612,6 +617,9 @@ namespace KingSurvivalGame
             }
         }
 
+        /// <summary>
+        /// execute the king's turn
+        /// </summary>
         private static void ProcessKingSide()
         {
             bool isExecuted = false;
@@ -624,7 +632,7 @@ namespace KingSurvivalGame
                 if (input != null)
                 {
                     input = input.ToUpper(); ////! input =
-                    isExecuted = proverkaIProcess(input);
+                    isExecuted = checkAndExecuteTurn(input);
                 }
                 else
                 {
@@ -656,7 +664,7 @@ namespace KingSurvivalGame
                     //// Console.WriteLine(input);
                     //// Console.WriteLine("hahah");
                     input = input.ToUpper(); ////! input =
-                    isExecuted = proverkaIProcess(input);
+                    isExecuted = checkAndExecuteTurn(input);
                 }
                 else
                 {
@@ -680,6 +688,13 @@ namespace KingSurvivalGame
             }
         }
 
+        /// <summary>
+        /// check the next possible move of a pawn
+        /// </summary>
+        /// <param name="currentCoordinates">current pawn coordinates</param>
+        /// <param name="checkDirection">direction to check</param>
+        /// <param name="currentPawn">pawn parameter</param>
+        /// <returns>new coordinates</returns>
         private static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displasmentDownLeft = { 1, -2 };
@@ -961,7 +976,14 @@ namespace KingSurvivalGame
             }
         }
 
-        static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
+        /// <summary>
+        /// checks the next position if the king is to move
+        /// </summary>
+        /// <param name="currentCoordinates">current coordinates of the king</param>
+        /// <param name="firstDirection">current direction of the king</param>
+        /// <param name="secondDirection">new direction of the king</param>
+        /// <returns>new coordinates</returns>
+        private static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
