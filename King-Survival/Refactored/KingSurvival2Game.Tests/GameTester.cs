@@ -4,9 +4,9 @@
 namespace KingSurvival2Game.Tests
 {
     using System;
-    using KingSurvival2Game;
+    using KingSurvivalGame;
     using Microsoft.VisualStudio.QualityTools.UnitTestFramework;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;         
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// provides testing functionality for the King Survival game
@@ -15,12 +15,14 @@ namespace KingSurvival2Game.Tests
     public class GameTester
     {
         /// <summary>
-        /// test description
+        /// test kill game
         /// </summary>
         [TestMethod]
-        public void UnitTestExample()
+        public void TestInteractWithFinishedGame()
         {
-            Assert.AreEqual(1, 1);
+            KingSurvivalGame.MovementsCounter = 0;
+            SingletonGameUtilities.Interact(true, 0);
+            Assert.AreEqual(KingSurvivalGame.GameIsFinished, true);
         }
     }
 }

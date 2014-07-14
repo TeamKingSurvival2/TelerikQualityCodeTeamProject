@@ -112,6 +112,15 @@ namespace KingSurvivalGame
         private static int movementsCounter = 0;
 
         /// <summary>
+        /// Gets a value indicating whether the movementsCounter field.
+        /// </summary>
+        public static int MovementsCounter
+        {
+            get { return KingSurvivalGame.movementsCounter; }
+            set { KingSurvivalGame.movementsCounter = value; }
+        }
+
+        /// <summary>
         /// holds game completion state
         /// </summary>
         private static bool gameIsFinished = false;
@@ -122,6 +131,7 @@ namespace KingSurvivalGame
         public static bool GameIsFinished
         {
             get { return KingSurvivalGame.gameIsFinished; }
+            set { KingSurvivalGame.gameIsFinished = value; }
         }
 
         /// <summary>
@@ -222,7 +232,7 @@ namespace KingSurvivalGame
         /// <param name="turnCounter">the number of turns passed since the game started</param>
         private static void InteractWithUser(KingSurvivalGame game, int turnCounter)
         {
-            SingletonUserInteractor.Interact(game, turnCounter);
+            SingletonGameUtilities.Interact(KingSurvivalGame.GameIsFinished, turnCounter);
         }
 
         /// <summary>
@@ -655,7 +665,7 @@ namespace KingSurvivalGame
                 }
             }
 
-            InteractWithUser(KingSurvivalGame.self, movementsCounter);
+            InteractWithUser(KingSurvivalGame.self, KingSurvivalGame.movementsCounter);
         }
 
         /// <summary>
