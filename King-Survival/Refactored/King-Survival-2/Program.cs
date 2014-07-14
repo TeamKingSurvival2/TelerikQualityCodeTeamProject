@@ -108,7 +108,12 @@ namespace KingSurvivalGame
         /// </summary>
         private static bool gameIsFinished = false;
 
-        private static bool proverka(int[] positionCoodinates)
+        /// <summary>
+        /// checks if coordinates are within the game field
+        /// </summary>
+        /// <param name="positionCoodinates">coordinates integer array parameter</param>
+        /// <returns>a true or false boolean value</returns>
+        private static bool checkIfCoordsAreWithinGameField(int[] positionCoodinates)
         {
             int positonRow = positionCoodinates[0];
             bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
@@ -120,7 +125,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// displays the game board on screen
         /// </summary>
-        static void DisplayBoard()
+        private static void DisplayBoard()
         {
             Console.WriteLine();
             for (int row = 0; row < board.GetLength(0); row++)
@@ -128,7 +133,7 @@ namespace KingSurvivalGame
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
-                    bool isCellIn = proverka(coordinates);
+                    bool isCellIn = checkIfCoordsAreWithinGameField(coordinates);
                     if (isCellIn)
                     {
                         if (row % 2 == 0)
@@ -184,7 +189,11 @@ namespace KingSurvivalGame
             Console.WriteLine();
         }
 
-        static void InteractWithUser(int moveCounter)
+        /// <summary>
+        /// alternates between king and pawn turns, checks for end of game
+        /// </summary>
+        /// <param name="turnCounter">the number of turns passed since the game started</param>
+        private static void InteractWithUser(int turnCounter)
         {
             if (gameIsFinished)
             {
@@ -193,7 +202,7 @@ namespace KingSurvivalGame
             }
             else
             {
-                if (moveCounter % 2 == 0)
+                if (turnCounter % 2 == 0)
                 {
                     DisplayBoard();
                     ProcessKingSide();
@@ -206,7 +215,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static bool proverka2(string checkedString)
+        private static bool proverka2(string checkedString)
         {
             if (movementsCounter % 2 == 0)
             {
@@ -359,6 +368,7 @@ namespace KingSurvivalGame
                                 equal[i] = 1;
                             }
                         }
+
                         for (int i = 0; i < 2; i++)
                         {
                             if (equal[i] == 1)
@@ -366,12 +376,14 @@ namespace KingSurvivalGame
                                 hasAnEqual = true;
                             }
                         }
+
                         if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
+
                         return hasAnEqual;
 
                     default:
@@ -676,7 +688,7 @@ namespace KingSurvivalGame
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = board[currentCoordinates[0], currentCoordinates[1]];
                     board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -810,7 +822,7 @@ namespace KingSurvivalGame
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = board[currentCoordinates[0], currentCoordinates[1]];
                     board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -935,13 +947,13 @@ namespace KingSurvivalGame
                         gameIsFinished = true;
                         return null;
                     }
+
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("You can't go in this direction! ");
                     Console.ResetColor();
                     return null;
                 }
             }
-
         }
 
         static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
@@ -958,7 +970,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1001,7 +1013,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1047,7 +1059,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1090,7 +1102,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (proverka(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
