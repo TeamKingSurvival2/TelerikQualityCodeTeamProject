@@ -1,4 +1,4 @@
-﻿// <copyright file="Program.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+﻿// <copyright file="KingSurvivalGame.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
 // <author>King Survival 2 Team</author>
 
 namespace KingSurvivalGame
@@ -112,11 +112,20 @@ namespace KingSurvivalGame
         private static bool gameIsFinished = false;
 
         /// <summary>
+        /// contains main executable program logic
+        /// </summary>
+        public static void Main()
+        {
+            InteractWithUser(movementsCounter);
+            Console.WriteLine("\nThank you for playing this game!\n\n");
+        }
+
+        /// <summary>
         /// checks if coordinates are within the game field
         /// </summary>
         /// <param name="positionCoodinates">coordinates integer array parameter</param>
         /// <returns>a true or false boolean value</returns>
-        private static bool checkIfCoordsAreWithinGameField(int[] positionCoodinates)
+        private static bool CheckIfCoordsAreWithinGameField(int[] positionCoodinates)
         {
             int positonRow = positionCoodinates[0];
             bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
@@ -136,7 +145,7 @@ namespace KingSurvivalGame
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
-                    bool isCellIn = checkIfCoordsAreWithinGameField(coordinates);
+                    bool isCellIn = CheckIfCoordsAreWithinGameField(coordinates);
                     if (isCellIn)
                     {
                         if (row % 2 == 0)
@@ -218,7 +227,12 @@ namespace KingSurvivalGame
             }
         }
 
-        private static bool proverka2(string checkedString)
+        /// <summary>
+        /// perform a second check
+        /// </summary>
+        /// <param name="checkedString">checked parameter string</param>
+        /// <returns>a true/false boolean value</returns>
+        private static bool SecondCheck(string checkedString)
         {
             if (movementsCounter % 2 == 0)
             {
@@ -406,9 +420,9 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="checkedInput">input parameter</param>
         /// <returns>a boolean true/false value</returns>
-        private static bool checkAndExecuteTurn(string checkedInput)
+        private static bool CheckAndExecuteTurn(string checkedInput)
         {
-            bool commandNameIsOK = proverka2(checkedInput);
+            bool commandNameIsOK = SecondCheck(checkedInput);
             if (commandNameIsOK)
             {
                 char startLetter = checkedInput[0];
@@ -632,7 +646,7 @@ namespace KingSurvivalGame
                 if (input != null)
                 {
                     input = input.ToUpper(); ////! input =
-                    isExecuted = checkAndExecuteTurn(input);
+                    isExecuted = CheckAndExecuteTurn(input);
                 }
                 else
                 {
@@ -664,7 +678,7 @@ namespace KingSurvivalGame
                     //// Console.WriteLine(input);
                     //// Console.WriteLine("hahah");
                     input = input.ToUpper(); ////! input =
-                    isExecuted = checkAndExecuteTurn(input);
+                    isExecuted = CheckAndExecuteTurn(input);
                 }
                 else
                 {
@@ -678,7 +692,11 @@ namespace KingSurvivalGame
             InteractWithUser(movementsCounter);
         }
 
-        static void checkForKingExit(int currentKingXAxe)
+        /// <summary>
+        /// checks if king is able to make a move
+        /// </summary>
+        /// <param name="currentKingXAxe">parameter integer</param>
+        private static void CheckForKingExit(int currentKingXAxe)
         {
             if (currentKingXAxe == 2)
             {
@@ -704,7 +722,7 @@ namespace KingSurvivalGame
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = board[currentCoordinates[0], currentCoordinates[1]];
                     board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -841,7 +859,7 @@ namespace KingSurvivalGame
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = board[currentCoordinates[0], currentCoordinates[1]];
                     board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -997,7 +1015,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1008,7 +1026,7 @@ namespace KingSurvivalGame
                             kingExistingMoves[i] = true;
                         }
 
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
@@ -1040,7 +1058,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1051,7 +1069,7 @@ namespace KingSurvivalGame
                             kingExistingMoves[i] = true;
                         }
 
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
@@ -1086,7 +1104,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1097,7 +1115,7 @@ namespace KingSurvivalGame
                             kingExistingMoves[i] = true;
                         }
 
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
@@ -1129,7 +1147,7 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (checkIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
+                    if (CheckIfCoordsAreWithinGameField(newCoords) && board[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = board[currentCoordinates[0], currentCoordinates[1]];
                         board[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -1140,7 +1158,7 @@ namespace KingSurvivalGame
                             kingExistingMoves[i] = true;
                         }
 
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
@@ -1168,17 +1186,8 @@ namespace KingSurvivalGame
                         return null;
                     }
                 }
-                //// checkForKingExit();
+                //// CheckForKingExit();
             }
-        }
-
-        /// <summary>
-        /// contains main executable program logic
-        /// </summary>
-        public static void Main()
-        {
-            InteractWithUser(movementsCounter);
-            Console.WriteLine("\nThank you for playing this game!\n\n");
         }
     }
 }
