@@ -101,6 +101,9 @@ namespace KingSurvivalGame
         /// </summary>
         private static string[] validDPawnInputs = { "DDL", "DDR" };
 
+        /// <summary>
+        /// counts the number of king/pawn moves made in the game
+        /// </summary>
         private static int movementsCounter = 0;
 
         /// <summary>
@@ -398,7 +401,7 @@ namespace KingSurvivalGame
             return true;
         }
 
-        static bool proverkaIProcess(string checkedInput)
+        private static bool proverkaIProcess(string checkedInput)
         {
             bool commandNameIsOK = proverka2(checkedInput);
             if (commandNameIsOK)
@@ -469,8 +472,6 @@ namespace KingSurvivalGame
                             if (coords != null)
                             {
                                 pawnPositions[1, 0] = coords[0];
-
-
                                 pawnPositions[1, 1] = coords[1];
                             }
                         }
@@ -482,8 +483,6 @@ namespace KingSurvivalGame
                         {
                             int[] oldCoordinates = new int[2];
                             oldCoordinates[0] = pawnPositions[2, 0];
-
-
                             oldCoordinates[1] = pawnPositions[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
@@ -598,14 +597,13 @@ namespace KingSurvivalGame
                                     kingPosition[0] = coords[0];
                                     kingPosition[1] = coords[1];
                                 }
-
                             }
 
                             return true;
                         }
 
-                    default:
-                        Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!"); return false;
+                    default: Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!");
+                        return false;
                 }
             }
             else
@@ -614,7 +612,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static void ProcessKingSide()
+        private static void ProcessKingSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -625,7 +623,7 @@ namespace KingSurvivalGame
                 string input = Console.ReadLine();
                 if (input != null)
                 {
-                    input = input.ToUpper();//! input =
+                    input = input.ToUpper(); ////! input =
                     isExecuted = proverkaIProcess(input);
                 }
                 else
@@ -636,6 +634,7 @@ namespace KingSurvivalGame
                     Console.ResetColor();
                 }
             }
+
             InteractWithUser(movementsCounter);
         }
 
@@ -652,11 +651,11 @@ namespace KingSurvivalGame
                 Console.ResetColor();
                 string input = Console.ReadLine();
                 //// input = input.Trim();
-                if (input != null)//"/n")
+                if ((input != null) && (input != "/n"))
                 {
                     //// Console.WriteLine(input);
                     //// Console.WriteLine("hahah");
-                    input = input.ToUpper();////! input =
+                    input = input.ToUpper(); ////! input =
                     isExecuted = proverkaIProcess(input);
                 }
                 else
@@ -665,9 +664,9 @@ namespace KingSurvivalGame
                     Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Please enter something!");
                     Console.ResetColor();
-
                 }
             }
+
             InteractWithUser(movementsCounter);
         }
 
@@ -681,7 +680,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
+        private static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
@@ -797,6 +796,7 @@ namespace KingSurvivalGame
                             Console.WriteLine("ERROR!");
                             break;
                     }
+
                     for (int i = 0; i < 4; i++)
                     {
                         for (int j = 0; j < 2; j++)
@@ -807,6 +807,7 @@ namespace KingSurvivalGame
                             }
                         }
                     }
+
                     if (allAreFalse)
                     {
                         gameIsFinished = true;
@@ -814,6 +815,7 @@ namespace KingSurvivalGame
                         gameIsFinished = true;
                         return null;
                     }
+
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("You can't go in this direction! ");
                     Console.ResetColor();
@@ -855,6 +857,7 @@ namespace KingSurvivalGame
                             Console.WriteLine("ERROR!");
                             break;
                     }
+
                     return newCoords;
                 }
                 else
@@ -1143,7 +1146,7 @@ namespace KingSurvivalGame
                         return null;
                     }
                 }
-                // checkForKingExit();
+                //// checkForKingExit();
             }
         }
 
