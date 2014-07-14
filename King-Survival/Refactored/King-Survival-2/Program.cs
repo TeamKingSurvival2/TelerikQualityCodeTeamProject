@@ -1139,7 +1139,7 @@ namespace KingSurvivalGame
         public static void Main()
         {
             InteractWithUser(movementsCounter);
-            Console.WriteLine("\nThank you for using this game!\n\n");
+            Console.WriteLine("\nThank you for playing this game!\n\n");
         }
     }
 }
