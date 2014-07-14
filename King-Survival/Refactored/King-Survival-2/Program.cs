@@ -391,9 +391,10 @@ namespace KingSurvivalGame
                         Console.WriteLine("Invalid command name!");
                         Console.ResetColor();
                         return false;
-                    //    break;
+                    //// break;
                 }
             }
+
             return true;
         }
 
@@ -422,7 +423,6 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
                             oldCoordinates[0] = pawnPositions[0, 0];
 
@@ -437,6 +437,7 @@ namespace KingSurvivalGame
                                 pawnPositions[0, 1] = coords[1];
                             }
                         }
+
                         return true;
 
                     case 'B':
@@ -457,12 +458,9 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
 
                             oldCoordinates[0] = pawnPositions[1, 0];
-
-
 
                             oldCoordinates[1] = pawnPositions[1, 1];
 
@@ -476,6 +474,7 @@ namespace KingSurvivalGame
                                 pawnPositions[1, 1] = coords[1];
                             }
                         }
+
                         return true;
 
                     case 'C':
@@ -496,7 +495,6 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
                             oldCoordinates[0] = pawnPositions[2, 0];
                             oldCoordinates[1] = pawnPositions[2, 1];
@@ -508,6 +506,7 @@ namespace KingSurvivalGame
                                 pawnPositions[1, 1] = coords[1];
                             }
                         }
+
                         return true;
 
                     case 'D':
@@ -526,7 +525,6 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
                             oldCoordinates[0] = pawnPositions[3, 0];
                             oldCoordinates[1] = pawnPositions[3, 1];
@@ -538,6 +536,7 @@ namespace KingSurvivalGame
                                 pawnPositions[3, 1] = coords[1];
                             }
                         }
+
                         return true;
 
                     case 'K':
@@ -569,11 +568,11 @@ namespace KingSurvivalGame
                                     kingPosition[1] = coords[1];
                                 }
                             }
+
                             return true;
                         }
                         else
                         {
-                            //=KD_
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
@@ -589,7 +588,6 @@ namespace KingSurvivalGame
                             }
                             else
                             {
-                                //==KDD
                                 int[] oldCoordinates = new int[2];
                                 oldCoordinates[0] = kingPosition[0];
                                 oldCoordinates[1] = kingPosition[1];
@@ -600,10 +598,12 @@ namespace KingSurvivalGame
                                     kingPosition[0] = coords[0];
                                     kingPosition[1] = coords[1];
                                 }
+
                             }
 
                             return true;
                         }
+
                     default:
                         Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!"); return false;
                 }
@@ -611,7 +611,6 @@ namespace KingSurvivalGame
             else
             {
                 return false;
-                ////message is from other
             }
         }
 
@@ -640,7 +639,10 @@ namespace KingSurvivalGame
             InteractWithUser(movementsCounter);
         }
 
-        static void ProcessPawnSide()
+        /// <summary>
+        /// process a pawn's turn
+        /// </summary>
+        private static void ProcessPawnSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -649,12 +651,12 @@ namespace KingSurvivalGame
                 Console.Write("Please enter pawn's turn: ");
                 Console.ResetColor();
                 string input = Console.ReadLine();
-                //input = input.Trim();
+                //// input = input.Trim();
                 if (input != null)//"/n")
                 {
-                    // Console.WriteLine(input);
-                    //Console.WriteLine("hahah");
-                    input = input.ToUpper();//! input =
+                    //// Console.WriteLine(input);
+                    //// Console.WriteLine("hahah");
+                    input = input.ToUpper();////! input =
                     isExecuted = proverkaIProcess(input);
                 }
                 else
