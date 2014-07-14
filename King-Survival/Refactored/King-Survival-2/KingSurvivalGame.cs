@@ -15,6 +15,11 @@ namespace KingSurvivalGame
     public class KingSurvivalGame
     {
         /// <summary>
+        /// self value
+        /// </summary>
+        private static KingSurvivalGame self;
+
+        /// <summary>
         /// game board as two-dimensional char array
         /// </summary>
         private static char[,] board = 
@@ -112,11 +117,20 @@ namespace KingSurvivalGame
         private static bool gameIsFinished = false;
 
         /// <summary>
+        /// Gets a value indicating whether the gameIsFinished field.
+        /// </summary>
+        public static bool GameIsFinished
+        {
+            get { return KingSurvivalGame.gameIsFinished; }
+        }
+
+        /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
         {
-            InteractWithUser(movementsCounter);
+            self = new KingSurvivalGame();
+            InteractWithUser(self, movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
 
@@ -137,7 +151,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// displays the game board on screen
         /// </summary>
-        private static void DisplayBoard()
+        public static void DisplayBoard()
         {
             Console.WriteLine();
             for (int row = 0; row < board.GetLength(0); row++)
@@ -204,27 +218,11 @@ namespace KingSurvivalGame
         /// <summary>
         /// alternates between king and pawn turns, checks for end of game
         /// </summary>
+        /// <param name="game">game object</param>
         /// <param name="turnCounter">the number of turns passed since the game started</param>
-        private static void InteractWithUser(int turnCounter)
+        private static void InteractWithUser(KingSurvivalGame game, int turnCounter)
         {
-            if (gameIsFinished)
-            {
-                Console.WriteLine("G-A-M-E- -O-V-E-R");
-                return;
-            }
-            else
-            {
-                if (turnCounter % 2 == 0)
-                {
-                    DisplayBoard();
-                    ProcessKingSide();
-                }
-                else
-                {
-                    DisplayBoard();
-                    ProcessPawnSide();
-                }
-            }
+            SingletonUserInteractor.Interact(game, turnCounter);
         }
 
         /// <summary>
@@ -408,7 +406,7 @@ namespace KingSurvivalGame
                         Console.WriteLine("Invalid command name!");
                         Console.ResetColor();
                         return false;
-                    //// break;
+                        break;
                 }
             }
 
@@ -634,7 +632,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// execute the king's turn
         /// </summary>
-        private static void ProcessKingSide()
+        public static void ProcessKingSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -657,13 +655,13 @@ namespace KingSurvivalGame
                 }
             }
 
-            InteractWithUser(movementsCounter);
+            InteractWithUser(KingSurvivalGame.self, movementsCounter);
         }
 
         /// <summary>
         /// process a pawn's turn
         /// </summary>
-        private static void ProcessPawnSide()
+        public static void ProcessPawnSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -689,7 +687,7 @@ namespace KingSurvivalGame
                 }
             }
 
-            InteractWithUser(movementsCounter);
+            InteractWithUser(KingSurvivalGame.self, movementsCounter);
         }
 
         /// <summary>
