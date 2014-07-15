@@ -15,6 +15,66 @@ namespace KingSurvivalGame
     public class KingSurvivalGame
     {
         /// <summary>
+        /// holds the KingUpRight move value
+        /// </summary>
+        public const string KingUpRight = "KUR";
+
+        /// <summary>
+        /// holds the KingUpLeft move value
+        /// </summary>
+        public const string KingUpLeft = "KUL";
+
+        /// <summary>
+        /// holds the KingDownRight move value
+        /// </summary>
+        public const string KingDownRight = "KDR";
+
+        /// <summary>
+        /// holds the KingDownLeft move value
+        /// </summary>
+        public const string KingDownLeft = "KDL";
+
+        /// <summary>
+        /// holds the PawnADownRight move value
+        /// </summary>
+        public const string PawnADownRight = "ADR";
+
+        /// <summary>
+        /// holds the PawnADownLeft move value
+        /// </summary>
+        public const string PawnADownLeft = "ADL";
+
+        /// <summary>
+        /// holds the PawnBDownRight move value
+        /// </summary>
+        public const string PawnBDownRight = "BDR";
+
+        /// <summary>
+        /// holds the PawnBDownLeft move value
+        /// </summary>
+        public const string PawnBDownLeft = "BDL";
+
+        /// <summary>
+        /// holds the PawnCDownRight move value
+        /// </summary>
+        public const string PawnCDownRight = "CDR";
+
+        /// <summary>
+        /// holds the PawnCDownLeft move value
+        /// </summary>
+        public const string PawnCDownLeft = "CDL";
+
+        /// <summary>
+        /// holds the PawnDDownRight move value
+        /// </summary>
+        public const string PawnDDownRight = "DDR";
+
+        /// <summary>
+        /// holds the PawnDDownLeft move value
+        /// </summary>
+        public const string PawnDDownLeft = "DDL";
+
+        /// <summary>
         /// self value
         /// </summary>
         private static KingSurvivalGame self;
@@ -84,27 +144,27 @@ namespace KingSurvivalGame
         /// <summary>
         /// contains all valid input strings for the king
         /// </summary>
-        private static string[] validKingInputs = { "KUL", "KUR", "KDL", "KDR" };
+        private static string[] validKingInputs = { KingUpLeft, KingUpRight, KingDownLeft, KingDownRight };
 
         /// <summary>
         /// contains all valid input strings for pawn A
         /// </summary>
-        private static string[] validAPawnInputs = { "ADL", "ADR" };
+        private static string[] validAPawnInputs = { PawnADownLeft, PawnADownRight };
 
         /// <summary>
         /// contains all valid input strings for pawn B
         /// </summary>
-        private static string[] validBPawnInputs = { "BDL", "BDR" };
+        private static string[] validBPawnInputs = { PawnBDownLeft, PawnBDownRight };
 
         /// <summary>
         /// contains all valid input strings for pawn C
         /// </summary>
-        private static string[] validCPawnInputs = { "CDL", "CDR" };
+        private static string[] validCPawnInputs = { PawnCDownLeft, PawnCDownRight };
 
         /// <summary>
         /// contains all valid input strings for pawn D
         /// </summary>
-        private static string[] validDPawnInputs = { "DDL", "DDR" };
+        private static string[] validDPawnInputs = { PawnDDownLeft, PawnDDownRight };
 
         /// <summary>
         /// counts the number of king/pawn moves made in the game
