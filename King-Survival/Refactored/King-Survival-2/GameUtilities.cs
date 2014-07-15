@@ -1,4 +1,4 @@
-﻿// <copyright file="SingletonGameUtilities.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+﻿// <copyright file="GameUtilities.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
 // <author>King Survival 2 Team</author>
 
 namespace KingSurvivalGame
@@ -8,7 +8,7 @@ namespace KingSurvivalGame
     /// <summary>
     /// alternates between two function calls depending on a condition
     /// </summary>
-    public static class SingletonGameUtilities
+    public static class GameUtilities
     {
         /// <summary>
         /// interacts with a game object

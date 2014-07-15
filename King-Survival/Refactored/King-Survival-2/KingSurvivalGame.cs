@@ -232,7 +232,7 @@ namespace KingSurvivalGame
         /// <param name="turnCounter">the number of turns passed since the game started</param>
         private static void InteractWithUser(KingSurvivalGame game, int turnCounter)
         {
-            SingletonGameUtilities.Interact(KingSurvivalGame.GameIsFinished, turnCounter);
+            GameUtilities.Interact(KingSurvivalGame.GameIsFinished, turnCounter);
         }
 
         /// <summary>

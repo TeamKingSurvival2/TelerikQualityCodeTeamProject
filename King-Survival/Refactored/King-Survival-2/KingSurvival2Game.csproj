@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KingSurvivalGame.cs" />
-    <Compile Include="SingletonGameUtilities.cs" />
+    <Compile Include="GameUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
