@@ -203,7 +203,7 @@ namespace KingSurvivalGame
         {
             Console.OutputEncoding = Encoding.UTF8;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            Console.SetWindowSize(40, 23);
+            Console.SetWindowSize(41, 26);
             Console.BufferWidth = 41;
             Console.BufferHeight = 26;
             Console.Title = "King Survival Game";

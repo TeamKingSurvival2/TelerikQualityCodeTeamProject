@@ -60,6 +60,7 @@ namespace KingSurvivalGame
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("     ");
                     }
+
                     Console.WriteLine();
                 }
 
@@ -72,10 +73,12 @@ namespace KingSurvivalGame
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.Write("     ");
                     }
+
                     Console.WriteLine();
                 }
             }            
             Console.BackgroundColor = ConsoleColor.Black;
+
         }
     }
 }
