@@ -4,6 +4,7 @@
 namespace KingSurvivalGame
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// alternates between two function calls depending on a condition
@@ -38,6 +39,43 @@ namespace KingSurvivalGame
                     KingSurvivalGame.ProcessPawnSide();
                 }
             }
+        }
+
+        /// <summary>
+        /// displays the current turn of the King Survival game
+        /// </summary>
+        /// <param name="gameObject">game object passed as parameter</param>
+        public static void Display(KingSurvivalGame gameObject)
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            for (int k = 0; k < 4; k++)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write("     ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("     ");
+                    }
+                    Console.WriteLine();
+                }
+
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("     ");
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write("     ");
+                    }
+                    Console.WriteLine();
+                }
+            }            
+            Console.BackgroundColor = ConsoleColor.Black;
         }
     }
 }

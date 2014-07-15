@@ -5,8 +5,10 @@ namespace KingSurvivalGame
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -199,7 +201,15 @@ namespace KingSurvivalGame
         /// </summary>
         public static void Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Console.SetWindowSize(40, 23);
+            Console.BufferWidth = 41;
+            Console.BufferHeight = 26;
+            Console.Title = "King Survival Game";
+
             self = new KingSurvivalGame();
+            //GameUtilities.Display(self);
             InteractWithUser(self, movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
