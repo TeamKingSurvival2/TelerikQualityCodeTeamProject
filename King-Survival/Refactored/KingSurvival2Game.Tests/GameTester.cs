@@ -23,6 +23,6 @@ namespace KingSurvival2Game.Tests
             KingSurvivalGame.MovementsCounter = 0;
             SingletonGameUtilities.Interact(true, 0);
             Assert.AreEqual(KingSurvivalGame.GameIsFinished, true);
-        }
+        }        
     }
 }
