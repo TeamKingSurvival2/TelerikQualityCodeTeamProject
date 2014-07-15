@@ -172,21 +172,21 @@ namespace KingSurvivalGame
         private static int movementsCounter = 0;
 
         /// <summary>
-        /// Gets a value indicating whether the movementsCounter field.
-        /// </summary>
-        public static int MovementsCounter
-        {
-            get { return KingSurvivalGame.movementsCounter; }
-            set { KingSurvivalGame.movementsCounter = value; }
-        }
-
-        /// <summary>
         /// holds game completion state
         /// </summary>
         private static bool gameIsFinished = false;
 
         /// <summary>
-        /// Gets a value indicating whether the gameIsFinished field.
+        /// Gets or sets a value indicating whether the movementsCounter field.
+        /// </summary>
+        public static int MovementsCounter
+        {
+            get { return KingSurvivalGame.movementsCounter; }
+            set { KingSurvivalGame.movementsCounter = value; }
+        }        
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the gameIsFinished field.
         /// </summary>
         public static bool GameIsFinished
         {
@@ -203,19 +203,66 @@ namespace KingSurvivalGame
             InteractWithUser(self, movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
+        
+        /// <summary>
+        /// execute the king's turn
+        /// </summary>
+        public static void ProcessKingSide()
+        {
+            bool isExecuted = false;
+            while (!isExecuted)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                Console.Write("Please enter king's turn: ");
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (input != null)
+                {
+                    input = input.ToUpper(); ////! input =
+                    isExecuted = CheckAndExecuteTurn(input);
+                }
+                else
+                {
+                    isExecuted = false;
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Please enter something!");
+                    Console.ResetColor();
+                }
+            }
+
+            InteractWithUser(KingSurvivalGame.self, KingSurvivalGame.movementsCounter);
+        }
 
         /// <summary>
-        /// checks if coordinates are within the game field
+        /// process a pawn's turn
         /// </summary>
-        /// <param name="positionCoodinates">coordinates integer array parameter</param>
-        /// <returns>a true or false boolean value</returns>
-        private static bool CheckIfCoordsAreWithinGameField(int[] positionCoodinates)
+        public static void ProcessPawnSide()
         {
-            int positonRow = positionCoodinates[0];
-            bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
-            int positonCol = positionCoodinates[1];
-            bool isColInBoard = (positonCol >= boardCorners[0, 1]) && (positonCol <= boardCorners[3, 1]);
-            return isRowInBoard && isColInBoard;
+            bool isExecuted = false;
+            while (!isExecuted)
+            {
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.Write("Please enter pawn's turn: ");
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                //// input = input.Trim();
+                if ((input != null) && (input != "/n"))
+                {
+                    //// Console.WriteLine(input);
+                    //// Console.WriteLine("hahah");
+                    input = input.ToUpper(); ////! input =
+                    isExecuted = CheckAndExecuteTurn(input);
+                }
+                else
+                {
+                    isExecuted = false;
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Please enter something!");
+                    Console.ResetColor();
+                }
+            }
+
+            InteractWithUser(KingSurvivalGame.self, movementsCounter);
         }
 
         /// <summary>
@@ -283,6 +330,20 @@ namespace KingSurvivalGame
             }
 
             Console.WriteLine();
+        }
+
+        /// <summary>
+        /// checks if coordinates are within the game field
+        /// </summary>
+        /// <param name="positionCoodinates">coordinates integer array parameter</param>
+        /// <returns>a true or false boolean value</returns>
+        private static bool CheckIfCoordsAreWithinGameField(int[] positionCoodinates)
+        {
+            int positonRow = positionCoodinates[0];
+            bool isRowInBoard = (positonRow >= boardCorners[0, 0]) && (positonRow <= boardCorners[3, 0]);
+            int positonCol = positionCoodinates[1];
+            bool isColInBoard = (positonCol >= boardCorners[0, 1]) && (positonCol <= boardCorners[3, 1]);
+            return isRowInBoard && isColInBoard;
         }
 
         /// <summary>
@@ -698,68 +759,7 @@ namespace KingSurvivalGame
                 return false;
             }
         }
-
-        /// <summary>
-        /// execute the king's turn
-        /// </summary>
-        public static void ProcessKingSide()
-        {
-            bool isExecuted = false;
-            while (!isExecuted)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.Write("Please enter king's turn: ");
-                Console.ResetColor();
-                string input = Console.ReadLine();
-                if (input != null)
-                {
-                    input = input.ToUpper(); ////! input =
-                    isExecuted = CheckAndExecuteTurn(input);
-                }
-                else
-                {
-                    isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
-                    Console.ResetColor();
-                }
-            }
-
-            InteractWithUser(KingSurvivalGame.self, KingSurvivalGame.movementsCounter);
-        }
-
-        /// <summary>
-        /// process a pawn's turn
-        /// </summary>
-        public static void ProcessPawnSide()
-        {
-            bool isExecuted = false;
-            while (!isExecuted)
-            {
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.Write("Please enter pawn's turn: ");
-                Console.ResetColor();
-                string input = Console.ReadLine();
-                //// input = input.Trim();
-                if ((input != null) && (input != "/n"))
-                {
-                    //// Console.WriteLine(input);
-                    //// Console.WriteLine("hahah");
-                    input = input.ToUpper(); ////! input =
-                    isExecuted = CheckAndExecuteTurn(input);
-                }
-                else
-                {
-                    isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
-                    Console.ResetColor();
-                }
-            }
-
-            InteractWithUser(KingSurvivalGame.self, movementsCounter);
-        }
-
+        
         /// <summary>
         /// checks if king is able to make a move
         /// </summary>
