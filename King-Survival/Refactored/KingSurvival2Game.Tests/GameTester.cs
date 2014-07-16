@@ -23,6 +23,40 @@ namespace KingSurvival2Game.Tests
             KingSurvivalGame.MovementsCounter = 0;
             GameUtilities.Interact(true, 0);
             Assert.AreEqual(KingSurvivalGame.GameIsFinished, true);
-        }        
-    }
+        }
+
+        /// <summary>
+        /// test display facade game
+        /// </summary>
+        [TestMethod]
+        public void TestDisplay()
+        {
+            KingSurvivalGame game = new KingSurvivalGame();
+            try
+            {
+                GameUtilities.Display(game);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+            Assert.IsTrue(true);
+        }
+
+        /// <summary>
+        /// test display facade game by passing null parameter
+        /// </summary>
+        [TestMethod]
+        public void TestDisplayWithNullReference() 
+        {
+            try
+            {
+                GameUtilities.Display(null);
+            }
+            catch (Exception)
+            {                
+                throw;
+            }            
+        }
+    }   
 }

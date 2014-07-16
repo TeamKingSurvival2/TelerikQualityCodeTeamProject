@@ -185,7 +185,7 @@ namespace KingSurvivalGame
         {
             get { return KingSurvivalGame.movementsCounter; }
             set { KingSurvivalGame.movementsCounter = value; }
-        }        
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the gameIsFinished field.
@@ -197,23 +197,35 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
+        /// Gets a value indicating whether the king position.
+        /// </summary>
+        public static int[] KingPosition
+        {
+            get
+            {
+                int[] result = { KingSurvivalGame.kingPosition[0], KingSurvivalGame.kingPosition[1] };
+                return result;
+            }
+        }
+
+        /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            Console.SetWindowSize(41, 26);
-            Console.BufferWidth = 41;
+            Console.SetWindowSize(40, 26);
+            Console.BufferWidth = 40;
             Console.BufferHeight = 26;
             Console.Title = "King Survival Game";
 
             self = new KingSurvivalGame();
-            //GameUtilities.Display(self);
-            InteractWithUser(self, movementsCounter);
-            Console.WriteLine("\nThank you for playing this game!\n\n");
+            GameUtilities.Display(self);
+            //InteractWithUser(self, movementsCounter);
+            //Console.WriteLine("\nThank you for playing this game!\n\n");
         }
-        
+
         /// <summary>
         /// execute the king's turn
         /// </summary>
@@ -769,7 +781,7 @@ namespace KingSurvivalGame
                 return false;
             }
         }
-        
+
         /// <summary>
         /// checks if king is able to make a move
         /// </summary>

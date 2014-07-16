@@ -47,6 +47,7 @@ namespace KingSurvivalGame
         /// <param name="gameObject">game object passed as parameter</param>
         public static void Display(KingSurvivalGame gameObject)
         {
+            //// draw game board
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             for (int k = 0; k < 4; k++)
@@ -60,8 +61,6 @@ namespace KingSurvivalGame
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("     ");
                     }
-
-                    Console.WriteLine();
                 }
 
                 for (int i = 0; i < 3; i++)
@@ -73,12 +72,23 @@ namespace KingSurvivalGame
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.Write("     ");
                     }
-
-                    Console.WriteLine();
                 }
-            }            
-            Console.BackgroundColor = ConsoleColor.Black;
+            }
 
+            //// draw King
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            int kingX = KingSurvivalGame.KingPosition[0];
+            int kingY = KingSurvivalGame.KingPosition[1];
+            Console.CursorLeft = 2 + (kingX - 6) * 5;
+            Console.CursorTop = 1 + (kingY - 3) * 3;
+            Console.Write('K');
+            //// TO-DO: draw pawns in red
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.CursorLeft = 0;
+            Console.CursorTop = 24;
+            
         }
     }
 }
