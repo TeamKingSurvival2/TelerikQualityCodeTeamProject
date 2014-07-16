@@ -30,33 +30,17 @@ namespace KingSurvival2Game.Tests
         /// </summary>
         [TestMethod]
         public void TestDisplay()
-        {
-            KingSurvivalGame game = new KingSurvivalGame();
+        {            
             try
             {
-                GameUtilities.Display(game);
+                GameUtilities.Display();
             }
             catch (Exception)
             {
                 Assert.Fail();
             }
-            Assert.IsTrue(true);
-        }
 
-        /// <summary>
-        /// test display facade game by passing null parameter
-        /// </summary>
-        [TestMethod]
-        public void TestDisplayWithNullReference() 
-        {
-            try
-            {
-                GameUtilities.Display(null);
-            }
-            catch (Exception)
-            {                
-                throw;
-            }            
+            Assert.IsTrue(true);
         }
     }   
 }

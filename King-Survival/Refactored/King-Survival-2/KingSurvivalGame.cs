@@ -209,6 +209,24 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
+        /// Gets a value indicating whether coordinates of pawn positions (2-dimensional array)
+        /// </summary>
+        public static int[,] PawnPositions
+        {
+            get
+            {
+                int[,] result = 
+                {
+                    { KingSurvivalGame.pawnPositions[0, 0], KingSurvivalGame.pawnPositions[0, 1] }, 
+                    { KingSurvivalGame.pawnPositions[1, 0], KingSurvivalGame.pawnPositions[1, 1] }, 
+                    { KingSurvivalGame.pawnPositions[2, 0], KingSurvivalGame.pawnPositions[2, 1] }, 
+                    { KingSurvivalGame.pawnPositions[3, 0], KingSurvivalGame.pawnPositions[3, 1] }
+                };
+                return result;
+            }
+        }
+
+        /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
@@ -221,9 +239,9 @@ namespace KingSurvivalGame
             Console.Title = "King Survival Game";
 
             self = new KingSurvivalGame();
-            GameUtilities.Display(self);
-            //InteractWithUser(self, movementsCounter);
-            //Console.WriteLine("\nThank you for playing this game!\n\n");
+            //GameUtilities.Display(self);
+            InteractWithUser(self, movementsCounter);
+            Console.WriteLine("\nThank you for playing this game!\n\n");
         }
 
         /// <summary>
