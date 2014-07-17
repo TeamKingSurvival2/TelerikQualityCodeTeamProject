@@ -7,7 +7,7 @@ namespace KingSurvivalGame
     using System.Collections.Generic;
 
     /// <summary>
-    /// alternates between two function calls depending on a condition
+    /// a Facade class to replace the original functionality of the King Survival game
     /// </summary>
     public static class GameUtilities
     {
@@ -27,13 +27,13 @@ namespace KingSurvivalGame
             else
             {
                 KingSurvivalGame.MovementsCounter = turnCounter;
-                //GameUtilities.Display();
-                KingSurvivalGame.DisplayBoard();
-                Console.WriteLine("King: [{0}, {1}]", KingSurvivalGame.KingPosition[0], KingSurvivalGame.KingPosition[1]);
-                Console.WriteLine("Pawn A: [{0}, {1}]", KingSurvivalGame.PawnPositions[0, 0], KingSurvivalGame.PawnPositions[0, 1]);
-                Console.WriteLine("Pawn B: [{0}, {1}]", KingSurvivalGame.PawnPositions[1, 0], KingSurvivalGame.PawnPositions[1, 1]);
-                Console.WriteLine("Pawn C: [{0}, {1}]", KingSurvivalGame.PawnPositions[2, 0], KingSurvivalGame.PawnPositions[2, 1]);
-                Console.WriteLine("Pawn D: [{0}, {1}]", KingSurvivalGame.PawnPositions[3, 0], KingSurvivalGame.PawnPositions[3, 1]);
+                GameUtilities.Display();
+                ////KingSurvivalGame.DisplayBoard();
+                ////Console.WriteLine("King: [{0}, {1}] ", KingSurvivalGame.KingPosition[0], KingSurvivalGame.KingPosition[1]);
+                ////Console.Write("Pawn A: [{0}, {1}] ", KingSurvivalGame.PawnPositions[0, 0], KingSurvivalGame.PawnPositions[0, 1]);
+                ////Console.Write("Pawn B: [{0}, {1}] ", KingSurvivalGame.PawnPositions[1, 0], KingSurvivalGame.PawnPositions[1, 1]);
+                ////Console.Write("Pawn C: [{0}, {1}] ", KingSurvivalGame.PawnPositions[2, 0], KingSurvivalGame.PawnPositions[2, 1]);
+                ////Console.Write("Pawn D: [{0}, {1}] ", KingSurvivalGame.PawnPositions[3, 0], KingSurvivalGame.PawnPositions[3, 1]);
                 if (turnCounter % 2 == 0)
                 {
                     Console.WriteLine("Turn number {0} - King's turn", KingSurvivalGame.MovementsCounter);
@@ -43,12 +43,12 @@ namespace KingSurvivalGame
                 {
                     Console.WriteLine("Turn number {0} - pawn's turn", KingSurvivalGame.MovementsCounter);
                     KingSurvivalGame.ProcessPawnSide();
-                }                
+                }
             }
         }
 
         /// <summary>
-        /// displays the current turn of the King Survival game
+        /// displays the current turn on screen
         /// </summary>        
         public static void Display()
         {
@@ -85,46 +85,87 @@ namespace KingSurvivalGame
             //// draw King
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Blue;
-            int kingX = KingSurvivalGame.KingPosition[0];
-            int kingY = KingSurvivalGame.KingPosition[1];
-            Console.CursorLeft = 2 + ((kingX - 6) * 5);
-            Console.CursorTop = 1 + ((kingY - 3) * 3);
+            int kingX = GameUtilities.GetX(KingSurvivalGame.KingPosition[1]);
+            int kingY = GameUtilities.GetY(KingSurvivalGame.KingPosition[0]);
+            Console.CursorLeft = kingX;
+            Console.CursorTop = kingY;
             Console.Write('K');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
             //// draw Pawns
             Console.BackgroundColor = ConsoleColor.Red;
-            int pawnAX = KingSurvivalGame.PawnPositions[0, 0];
-            int pawnAY = KingSurvivalGame.PawnPositions[0, 1];
-            Console.Write(pawnAX + " " + pawnAY);
-            Console.CursorLeft = 2 + ((pawnAX - 2) * 5);
-            Console.CursorTop = 1 + ((pawnAY - 4) * 3);
+            int pawnAX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[0, 1]);
+            int pawnAY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[0, 0]);
+            Console.CursorLeft = pawnAX;
+            Console.CursorTop = pawnAY;
             Console.Write('A');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnBX = KingSurvivalGame.PawnPositions[1, 0];
-            int pawnBY = KingSurvivalGame.PawnPositions[1, 1];
-            Console.CursorLeft = 2 + (pawnBX * 5);
-            Console.CursorTop = 1 + ((pawnBY - 8) * 3);
+            int pawnBX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[1, 1]);
+            int pawnBY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[1, 0]);
+            Console.CursorLeft = pawnBX;
+            Console.CursorTop = pawnBY;
             Console.Write('B');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnCX = KingSurvivalGame.PawnPositions[2, 0];
-            int pawnCY = KingSurvivalGame.PawnPositions[2, 1];
-            Console.CursorLeft = 2 + ((pawnCX + 2) * 5);
-            Console.CursorTop = 1 + ((pawnCY - 12) * 3);
+            int pawnCX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[2, 1]);
+            int pawnCY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[2, 0]);
+            Console.CursorLeft = pawnCX;
+            Console.CursorTop = pawnCY;
             Console.Write('C');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnDX = KingSurvivalGame.PawnPositions[3, 0];
-            int pawnDY = KingSurvivalGame.PawnPositions[3, 1];
-            Console.CursorLeft = 2 + ((pawnDX + 4) * 5);
-            Console.CursorTop = 1 + ((pawnDY - 16) * 3);
+            int pawnDX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[3, 1]);
+            int pawnDY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[3, 0]);
+            Console.CursorLeft = pawnDX;
+            Console.CursorTop = pawnDY;
             Console.Write('D');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
+        }
+
+        /// <summary>
+        /// calculates the X cursor coordinate based on info from the original implementation
+        /// </summary>
+        /// <param name="originalCoord">cursor X coordinate</param>
+        /// <returns>new cursor X coordinate for console drawing</returns>
+        public static int GetX(int originalCoord)
+        {
+            switch (originalCoord)
+            {
+                case 4: return 2;
+                case 6: return 7;
+                case 8: return 12;
+                case 10: return 17;
+                case 12: return 22;
+                case 14: return 27;
+                case 16: return 32;
+                case 18: return 37;
+                default: throw new ArgumentOutOfRangeException("X coordinate is invalid!");                    
+            }
+        }
+
+        /// <summary>
+        /// calculates the Y cursor coordinate based on info from the original implementation
+        /// </summary>
+        /// <param name="originalCoord">cursor Y coordinate</param>
+        /// <returns>new cursor Y coordinate for console drawing</returns>
+        public static int GetY(int originalCoord)
+        {
+            switch (originalCoord)
+            {
+                case 2: return 1;
+                case 3: return 4;
+                case 4: return 7;
+                case 5: return 10;
+                case 6: return 13;
+                case 7: return 16;                
+                case 8: return 19;
+                case 9: return 22;                
+                default: throw new ArgumentOutOfRangeException("Y coordinate is invalid!");
+            }
         }
     }
 }

@@ -233,13 +233,13 @@ namespace KingSurvivalGame
         {
             Console.OutputEncoding = Encoding.UTF8;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            Console.SetWindowSize(40, 26);
+            Console.SetWindowSize(40, 28);
             Console.BufferWidth = 40;
-            Console.BufferHeight = 26;
+            Console.BufferHeight = 28;
             Console.Title = "King Survival Game";
 
             self = new KingSurvivalGame();
-            //GameUtilities.Display(self);
+            //// GameUtilities.Display();
             InteractWithUser(self, movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
