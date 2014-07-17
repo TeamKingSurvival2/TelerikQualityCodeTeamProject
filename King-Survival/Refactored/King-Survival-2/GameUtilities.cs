@@ -85,8 +85,8 @@ namespace KingSurvivalGame
             //// draw King
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Blue;
-            int kingX = GameUtilities.GetX(KingSurvivalGame.KingPosition[1]);
-            int kingY = GameUtilities.GetY(KingSurvivalGame.KingPosition[0]);
+            int kingX = GameUtilities.GetXFromOriginalCoordinate(KingSurvivalGame.KingPosition[1]);
+            int kingY = GameUtilities.GetYFromOriginalCoordinate(KingSurvivalGame.KingPosition[0]);
             Console.CursorLeft = kingX;
             Console.CursorTop = kingY;
             Console.Write('K');
@@ -94,29 +94,29 @@ namespace KingSurvivalGame
             Console.CursorTop = 24;
             //// draw Pawns
             Console.BackgroundColor = ConsoleColor.Red;
-            int pawnAX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[0, 1]);
-            int pawnAY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[0, 0]);
+            int pawnAX = GameUtilities.GetXFromOriginalCoordinate(KingSurvivalGame.PawnPositions[0, 1]);
+            int pawnAY = GameUtilities.GetYFromOriginalCoordinate(KingSurvivalGame.PawnPositions[0, 0]);
             Console.CursorLeft = pawnAX;
             Console.CursorTop = pawnAY;
             Console.Write('A');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnBX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[1, 1]);
-            int pawnBY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[1, 0]);
+            int pawnBX = GameUtilities.GetXFromOriginalCoordinate(KingSurvivalGame.PawnPositions[1, 1]);
+            int pawnBY = GameUtilities.GetYFromOriginalCoordinate(KingSurvivalGame.PawnPositions[1, 0]);
             Console.CursorLeft = pawnBX;
             Console.CursorTop = pawnBY;
             Console.Write('B');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnCX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[2, 1]);
-            int pawnCY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[2, 0]);
+            int pawnCX = GameUtilities.GetXFromOriginalCoordinate(KingSurvivalGame.PawnPositions[2, 1]);
+            int pawnCY = GameUtilities.GetYFromOriginalCoordinate(KingSurvivalGame.PawnPositions[2, 0]);
             Console.CursorLeft = pawnCX;
             Console.CursorTop = pawnCY;
             Console.Write('C');
             Console.CursorLeft = 0;
             Console.CursorTop = 24;
-            int pawnDX = GameUtilities.GetX(KingSurvivalGame.PawnPositions[3, 1]);
-            int pawnDY = GameUtilities.GetY(KingSurvivalGame.PawnPositions[3, 0]);
+            int pawnDX = GameUtilities.GetXFromOriginalCoordinate(KingSurvivalGame.PawnPositions[3, 1]);
+            int pawnDY = GameUtilities.GetYFromOriginalCoordinate(KingSurvivalGame.PawnPositions[3, 0]);
             Console.CursorLeft = pawnDX;
             Console.CursorTop = pawnDY;
             Console.Write('D');
@@ -131,7 +131,7 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="originalCoord">cursor X coordinate</param>
         /// <returns>new cursor X coordinate for console drawing</returns>
-        public static int GetX(int originalCoord)
+        public static int GetXFromOriginalCoordinate(int originalCoord)
         {
             switch (originalCoord)
             {
@@ -152,7 +152,7 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="originalCoord">cursor Y coordinate</param>
         /// <returns>new cursor Y coordinate for console drawing</returns>
-        public static int GetY(int originalCoord)
+        public static int GetYFromOriginalCoordinate(int originalCoord)
         {
             switch (originalCoord)
             {

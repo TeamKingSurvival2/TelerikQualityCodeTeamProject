@@ -106,14 +106,11 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="-418498241">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="GameUtilities.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
       <settingsFile>2012.09.27 21:03:32.000</settingsFile>
-      <sourceFile>2014.07.17 11:20:24.588</sourceFile>
+      <sourceFile>2014.07.17 11:44:01.822</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>1794087754</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -132,4 +129,7 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="-418498241">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
