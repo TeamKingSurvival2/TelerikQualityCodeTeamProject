@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvivalGame
+﻿namespace KingSurvivalGame
 {
+    using System;
+    using System.Linq;
+
     /// <summary>
     /// Holds information about the coordinates of each element.
     /// </summary>
-    class Coordinates
+    public class Coordinates
     {
         /// <summary>
         /// The X coordinate.
         /// </summary>
-        int xCoord;
+        private int xCoord;
 
         /// <summary>
         /// The Y coordinate.
         /// </summary>
-        int yCoord;
+        private int yCoord;
 
         /// <summary>
-        /// Creates an instance of this class with the designated coordinates.
+        /// Initializes a new instance of the object with the designated coordinates.
         /// </summary>
-        /// <param name="x">The X coordinate.</param>
         /// <param name="y">The Y coordinate.</param>
+        /// <param name="x">The X coordinate.</param>
         public Coordinates(int y, int x)
         {
             this.yCoord = y;
@@ -33,32 +30,34 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
-        /// The X coordinate.
+        /// Gets or sets the X coordinate.
         /// </summary>
         public int XCoord
         {
             get
             {
-                return xCoord;
+                return this.xCoord;
             }
+
             set
             {
-                xCoord = value;
+                this.xCoord = value;
             }
         }
 
         /// <summary>
-        /// The Y coordinate.
+        /// Gets or sets the Y coordinate.
         /// </summary>
         public int YCoord
         {
             get
             {
-                return yCoord;
+                return this.yCoord;
             }
+
             set
             {
-                yCoord = value;
+                this.yCoord = value;
             }
         }
 
@@ -67,7 +66,7 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="first">The first coordinates.</param>
         /// <param name="second">The second coordinates.</param>
-        /// <returns>A bool value, indicating whether both coordinates are equal.</returns>
+        /// <returns>A boolean value, indicating whether both coordinates are equal.</returns>
         public static bool operator ==(Coordinates first, Coordinates second)
         {
             return first.Equals(second);
@@ -78,7 +77,7 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="first">The first coordinates.</param>
         /// <param name="second">The second coordinates.</param>
-        /// <returns>A bool value, indicating whether both coordinates are not equal.</returns>
+        /// <returns>A boolean value, indicating whether both coordinates are not equal.</returns>
         public static bool operator !=(Coordinates first, Coordinates second)
         {
             return !first.Equals(second);
@@ -99,7 +98,7 @@ namespace KingSurvivalGame
         /// Compares two coordinates. Returns true if they are equal, and false if they're not equal.
         /// </summary>
         /// <param name="obj">An object, which will be cast as Coordinates, to carry on with the comparison.</param>
-        /// <returns>A bool value, indicating whether the coordinates are equal.</returns>
+        /// <returns>A boolean value, indicating whether the coordinates are equal.</returns>
         public override bool Equals(object obj)
         {
             Coordinates objAsMatrixCoords = obj as Coordinates;

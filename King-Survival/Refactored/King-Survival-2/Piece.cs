@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-
-namespace KingSurvivalGame
+﻿namespace KingSurvivalGame
 {
-    class Piece
+    using System;
+    using System.Linq;
+
+    public class Piece
     {
         /// <summary>
         /// Creates an instance of this class King with it's position.
@@ -15,46 +15,13 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
-        /// Piece's position.
+        /// Gets or sets the Piece's position.
         /// </summary>
         public Coordinates Position { get; set; }
 
         /// <summary>
-        /// Piece's position.
+        /// Gets or sets the Piece's name.
         /// </summary>
         public string Name { get; set; }
-
-
     }
-    //class King
-    //{
-    //    /// <summary>
-    //    /// King's position.
-    //    /// </summary>
-    //    private Coordinates position;
-
-    //    /// <summary>
-    //    /// Creates an instance of this class King with it's position.
-    //    /// </summary>
-    //    public King()
-    //    {
-    //        this.Position = new Coordinates(9, 10);
-    //    }
-
-    //    /// <summary>
-    //    /// King's position.
-    //    /// </summary>
-    //    public Coordinates Position
-    //    {
-    //        get
-    //        {
-    //            return position;
-    //        }
-    //        set
-    //        {
-    //            position = value;
-    //        }
-    //    }
-
-    //}
 }

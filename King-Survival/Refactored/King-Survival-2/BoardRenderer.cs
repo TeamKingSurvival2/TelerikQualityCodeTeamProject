@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvivalGame
+﻿namespace KingSurvivalGame
 {
-    class BoardRenderer
+    using System;
+    using System.Linq;
+
+    /// <summary>
+    /// Holds information about the board.
+    /// </summary>
+    public class BoardRenderer
     {
         /// <summary>
         /// game board as two-dimensional char array
@@ -36,33 +36,37 @@ namespace KingSurvivalGame
                 new Coordinates(10, 19)
             };
 
-        public  static char[,] Board
+        /// <summary>
+        /// Gets game board as two-dimensional char array.
+        /// </summary>
+        public static char[,] Board
         {
             get
             {
                 return board;
             }
+
             private set
             {
                 board = value;
             }
         }
 
+        /// <summary>
+        /// Gets the coordinates of board corners.
+        /// </summary>
         public Coordinates[] BoardCorners
         {
             get
             {
                 return boardCorners;
             }
+
             private set
             {
                 boardCorners = value;
             }
         }
-
-        /// <summary>
-        /// displays the game board on screen
-        /// </summary>
 
         /// <summary>
         /// checks if coordinates are within the game field
@@ -76,6 +80,9 @@ namespace KingSurvivalGame
             return isRowInBoard && isColInBoard;
         }
 
+        /// <summary>
+        /// displays the game board on screen
+        /// </summary>
         public static void DisplayBoard()
         {
             Console.WriteLine();

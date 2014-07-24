@@ -21,7 +21,6 @@ namespace KingSurvivalGame
         /// array of pawns.
         /// </summary>
         private static Piece[] pawns = new Piece[4]
-        
         {
             new Piece("A", new Coordinates(2, 4)), 
             new Piece("B", new Coordinates(2, 8)), 
@@ -54,6 +53,16 @@ namespace KingSurvivalGame
         /// contains all valid input strings for pawns.
         /// </summary>
         private static readonly string[] ValidPawnInputs = { "DL", "DR" };
+
+        /// <summary>
+        /// Counter of number of movements.
+        /// </summary>
+        private static int movementsCounter = 0;
+
+        /// <summary>
+        /// holds game completion state
+        /// </summary>
+        private static bool gameIsFinished = false;
 
         /// <summary>
         /// interaction with user.
@@ -140,16 +149,10 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
-        /// Counter of number of movements.
-        /// </summary>
-        private static int movementsCounter = 0;
-
-        /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
         {
-
             InteractWithUser(movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
@@ -228,7 +231,6 @@ namespace KingSurvivalGame
                     }
                 }
 
-
                 if (!hasAnEqual)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
@@ -283,6 +285,7 @@ namespace KingSurvivalGame
                         {
                             oldCoordinates = pawns[1].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
+
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 pawns[1].Position = coords;
@@ -290,9 +293,9 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-
                             oldCoordinates = pawns[1].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
+
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 pawns[1].Position = coords;
@@ -328,6 +331,7 @@ namespace KingSurvivalGame
                         {
                             oldCoordinates = pawns[3].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
+
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 pawns[3].Position = coords;
@@ -335,18 +339,15 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-
                             oldCoordinates = pawns[3].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 pawns[3].Position = coords;
-
                             }
                         }
 
                         return true;
-
                     case 'K':
                         oldCoordinates = king.Position;
                         string command = checkedInput.Substring(1);
@@ -367,11 +368,6 @@ namespace KingSurvivalGame
                 return false;
             }
         }
-
-        /// <summary>
-        /// holds game completion state
-        /// </summary>
-        private static bool gameIsFinished = false;
 
         /// <summary>
         /// checks if king is able to make a move
@@ -407,7 +403,7 @@ namespace KingSurvivalGame
             Console.WriteLine(directions[checkDirection].XCoord.ToString());
             Console.WriteLine(newCoords.YCoord.ToString() + newCoords.XCoord.ToString());
             Console.WriteLine(BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords));
-            if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && (BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord]) == ' ')
+            if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] == ' ')
             {
                 char sign = BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord];
                 BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord] = ' ';
@@ -438,6 +434,7 @@ namespace KingSurvivalGame
                         Console.WriteLine("ERROR!");
                         break;
                 }
+
                 return newCoords;
             }
             else
@@ -553,7 +550,6 @@ namespace KingSurvivalGame
                 Console.ResetColor();
                 return new Coordinates(0, 0);
             }
-
         }
     }
 }
