@@ -15,12 +15,12 @@ namespace KingSurvivalGame
         /// <summary>
         /// coordinates of king position.
         /// </summary>
-       private static Piece king = new Piece("King", new Coordinates(9, 10));
+        private static Piece king = new Piece("King", new Coordinates(9, 10));
 
         /// <summary>
         /// array of pawns.
         /// </summary>
-       private static Piece[] pawns = new Piece[4]
+        private static Piece[] pawns = new Piece[4]
         
         {
             new Piece("A", new Coordinates(2, 4)), 
@@ -32,12 +32,12 @@ namespace KingSurvivalGame
         /// <summary>
         /// existing moves for the king
         /// </summary>
-       private static bool[] kingExistingMoves = { true, true, true, true };
+        private static bool[] kingExistingMoves = { true, true, true, true };
 
         /// <summary>
         /// existing moves for pawns
         /// </summary>
-       private static bool[,] pawnExistingMoves = 
+        private static bool[,] pawnExistingMoves = 
         {
             { true, true }, 
             { true, true }, 
@@ -48,17 +48,17 @@ namespace KingSurvivalGame
         /// <summary>
         /// contains all valid input strings for the king.
         /// </summary>
-       private static readonly string[] validKingInputs = { "UL", "UR", "DL", "DR" };
+        private static readonly string[] ValidKingInputs = { "UL", "UR", "DL", "DR" };
 
         /// <summary>
-        /// contains all valid input strings for powns.
+        /// contains all valid input strings for pawns.
         /// </summary>
-       private static readonly string[] validPawnInputs = { "DL", "DR" };
-        /// <summary>
-        /// alternates between king and pawn turns, checks for end of game
-        /// </summary>
-        
+        private static readonly string[] ValidPawnInputs = { "DL", "DR" };
 
+        /// <summary>
+        /// interaction with user.
+        /// </summary>
+        /// <param name="turnCounter">Counter of which pieces turn is.</param>
         public static void InteractWithUser(int turnCounter)
         {
             if (gameIsFinished)
@@ -84,7 +84,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// execute the king's turn
         /// </summary>
-       private static void ProcessKingSide()
+        private static void ProcessKingSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -113,7 +113,7 @@ namespace KingSurvivalGame
         /// <summary>
         /// process a pawn's turn
         /// </summary>
-       private static void ProcessPawnSide()
+        private static void ProcessPawnSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -139,14 +139,17 @@ namespace KingSurvivalGame
             InteractWithUser(movementsCounter);
         }
 
-       private static int movementsCounter = 0;
+        /// <summary>
+        /// Counter of number of movements.
+        /// </summary>
+        private static int movementsCounter = 0;
 
         /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
         {
-                   
+
             InteractWithUser(movementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
@@ -156,14 +159,14 @@ namespace KingSurvivalGame
         /// </summary>
         /// <param name="checkedString">checked parameter string</param>
         /// <returns>a true/false boolean value</returns>
-       private static bool IsValidCommand(string checkedString)
+        private static bool IsValidCommand(string checkedString)
         {
             if (movementsCounter % 2 == 0)
             {
                 int[] equal = new int[4];
-                for (int i = 0; i < validKingInputs.Length; i++)
+                for (int i = 0; i < ValidKingInputs.Length; i++)
                 {
-                    string reference = "K" + validKingInputs[i];
+                    string reference = "K" + ValidKingInputs[i];
                     int result = checkedString.CompareTo(reference);
                     if (result != 0)
                     {
@@ -200,9 +203,9 @@ namespace KingSurvivalGame
                 bool hasAnEqual = false;
                 if (startLetter == 'A' || startLetter == 'B' || startLetter == 'C' || startLetter == 'D')
                 {
-                    for (int i = 0; i < validPawnInputs.Length; i++)
+                    for (int i = 0; i < ValidPawnInputs.Length; i++)
                     {
-                        string reference = startLetter.ToString() + validPawnInputs[i];
+                        string reference = startLetter.ToString() + ValidPawnInputs[i];
 
                         int result = checkedString.CompareTo(reference);
 
@@ -224,7 +227,7 @@ namespace KingSurvivalGame
                         }
                     }
                 }
-                
+
 
                 if (!hasAnEqual)
                 {
@@ -287,7 +290,7 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            
+
                             oldCoordinates = pawns[1].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
@@ -332,7 +335,7 @@ namespace KingSurvivalGame
                         }
                         else
                         {
-                            
+
                             oldCoordinates = pawns[3].Position;
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
@@ -345,16 +348,15 @@ namespace KingSurvivalGame
                         return true;
 
                     case 'K':
-                                oldCoordinates = king.Position;
-                                string command = checkedInput.Substring(1);
-                                coords = CheckNextKingPosition(oldCoordinates, command);
-                                if (coords.XCoord != 0 && coords.YCoord != 0)
-                                {
-                                    king.Position = coords;
-                                }
+                        oldCoordinates = king.Position;
+                        string command = checkedInput.Substring(1);
+                        coords = CheckNextKingPosition(oldCoordinates, command);
+                        if (coords.XCoord != 0 && coords.YCoord != 0)
+                        {
+                            king.Position = coords;
+                        }
 
-                            return true;
-                        
+                        return true;
 
                     default: Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!");
                         return false;
@@ -369,13 +371,13 @@ namespace KingSurvivalGame
         /// <summary>
         /// holds game completion state
         /// </summary>
-       private static bool gameIsFinished = false;
+        private static bool gameIsFinished = false;
 
         /// <summary>
         /// checks if king is able to make a move
         /// </summary>
         /// <param name="currentKingXAxe">parameter integer</param>
-       private static void CheckForKingExit(int currentKingXAxe)
+        private static void CheckForKingExit(int currentKingXAxe)
         {
             if (currentKingXAxe == 2)
             {
@@ -392,7 +394,7 @@ namespace KingSurvivalGame
         /// <param name="checkDirection">direction to check</param>
         /// <param name="currentPawn">pawn parameter</param>
         /// <returns>new coordinates</returns>
-       private static Coordinates CheckNextPownPosition(Coordinates currentCoordinates, char checkDirection, char currentPawn)
+        private static Coordinates CheckNextPownPosition(Coordinates currentCoordinates, char checkDirection, char currentPawn)
         {
             Coordinates displasmentDownLeft = new Coordinates(1, -2);
             Coordinates displasmentDownRight = new Coordinates(1, 2);
@@ -436,12 +438,10 @@ namespace KingSurvivalGame
                         Console.WriteLine("ERROR!");
                         break;
                 }
-
                 return newCoords;
             }
             else
             {
-
                 bool allAreFalse = true;
                 switch (currentPawn)
                 {
@@ -493,15 +493,13 @@ namespace KingSurvivalGame
             }
         }
 
-
         /// <summary>
         /// checks the next position if the king is to move
         /// </summary>
         /// <param name="currentCoordinates">current coordinates of the king</param>
-        /// <param name="firstDirection">current direction of the king</param>
-        /// <param name="secondDirection">new direction of the king</param>
+        /// <param name="inputDirection">current direction of the king</param>
         /// <returns>new coordinates</returns>
-       private static Coordinates CheckNextKingPosition(Coordinates currentCoordinates, string inputDirection)
+        private static Coordinates CheckNextKingPosition(Coordinates currentCoordinates, string inputDirection)
         {
             Coordinates displasmentDownLeft = new Coordinates(1, -2);
             Coordinates displasmentDownRight = new Coordinates(1, 2);
