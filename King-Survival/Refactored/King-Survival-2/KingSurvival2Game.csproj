@@ -7,7 +7,7 @@
     <ProjectGuid>{842DAF0E-7B19-48CE-8066-4639CC1F6FB0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <RootNamespace>KingSurvivalGame</RootNamespace>
     <AssemblyName>ConsoleApplication1</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardRenderer.cs" />
+    <Compile Include="Coordinates.cs" />
     <Compile Include="KingSurvivalGame.cs" />
-    <Compile Include="GameUtilities.cs" />
+    <Compile Include="Piece.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
