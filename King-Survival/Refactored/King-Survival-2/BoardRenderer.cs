@@ -1,17 +1,18 @@
-﻿namespace KingSurvivalGame
+﻿// <copyright file="BoardRenderer.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+// <author>King Survival 2 Team</author>
+namespace KingSurvivalGame
 {
     using System;
-    using System.Linq;
 
     /// <summary>
     /// Holds information about the board.
     /// </summary>
-    public class BoardRenderer
+    public static class BoardRenderer
     {
         /// <summary>
         /// game board as two-dimensional char array
         /// </summary>
-        private static char[,] board = 
+        private static readonly char[,] TheBoard = 
         {                                    
             { 'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R' },
             { ' ', ' ', ' ', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', ' ', ' ', ' ' },
@@ -24,17 +25,17 @@
             { '6', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|', ' ', '6' },
             { '7', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'K', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|', ' ', '7' },
             { ' ', ' ', '|', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '|', ' ', ' ' },
-            { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' },
+            { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' }
         };
 
         /// <summary>
         /// coordinates of board corners
         /// </summary>
-        private static Coordinates[] boardCorners = new Coordinates[2]
-            {
-                new Coordinates(2, 4),
-                new Coordinates(10, 19)
-            };
+        private static readonly Coordinates[] TheBoardCorners =
+        {
+            new Coordinates(2, 4),
+            new Coordinates(10, 19)
+        };
 
         /// <summary>
         /// Gets game board as two-dimensional char array.
@@ -43,15 +44,18 @@
         {
             get
             {
-                return board;
+                return TheBoard;
             }
 
+/*
             private set
             {
                 board = value;
             }
+*/
         }
 
+/*
         /// <summary>
         /// Gets the coordinates of board corners.
         /// </summary>
@@ -67,6 +71,7 @@
                 boardCorners = value;
             }
         }
+*/
 
         /// <summary>
         /// checks if coordinates are within the game field
@@ -75,8 +80,8 @@
         /// <returns>a true or false boolean value</returns>
         public static bool CheckIfCoordsAreWithinGameField(Coordinates positionCoodinates)
         {
-            bool isRowInBoard = (positionCoodinates.XCoord >= boardCorners[0].XCoord) && (positionCoodinates.XCoord <= boardCorners[1].XCoord);
-            bool isColInBoard = (positionCoodinates.YCoord >= boardCorners[0].YCoord) && (positionCoodinates.YCoord <= boardCorners[1].YCoord);
+            bool isRowInBoard = (positionCoodinates.XCoord >= TheBoardCorners[0].XCoord) && (positionCoodinates.XCoord <= TheBoardCorners[1].XCoord);
+            bool isColInBoard = (positionCoodinates.YCoord >= TheBoardCorners[0].YCoord) && (positionCoodinates.YCoord <= TheBoardCorners[1].YCoord);
             return isRowInBoard && isColInBoard;
         }
 
@@ -86,11 +91,11 @@
         public static void DisplayBoard()
         {
             Console.WriteLine();
-            for (int row = 0; row < board.GetLength(0); row++)
+            for (int row = 0; row < TheBoard.GetLength(0); row++)
             {
-                for (int col = 0; col < board.GetLength(1); col++)
+                for (int col = 0; col < TheBoard.GetLength(1); col++)
                 {
-                    Coordinates coordinates = new Coordinates(row, col);
+                    var coordinates = new Coordinates(row, col);
                     bool isCellIn = CheckIfCoordsAreWithinGameField(coordinates);
                     if (isCellIn)
                     {
@@ -100,43 +105,43 @@
                             {
                                 Console.BackgroundColor = ConsoleColor.Green;
                                 Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(board[row, col]);
+                                Console.Write(TheBoard[row, col]);
                                 Console.ResetColor();
                             }
                             else if (col % 2 == 0)
                             {
                                 Console.BackgroundColor = ConsoleColor.Blue;
                                 Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(board[row, col]);
+                                Console.Write(TheBoard[row, col]);
                                 Console.ResetColor();
                             }
                             else if (col % 2 != 0)
                             {
-                                Console.Write(board[row, col]);
+                                Console.Write(TheBoard[row, col]);
                             }
                         }
                         else if (col % 4 == 0)
                         {
                             Console.BackgroundColor = ConsoleColor.Blue;
                             Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(board[row, col]);
+                            Console.Write(TheBoard[row, col]);
                             Console.ResetColor();
                         }
                         else if (col % 2 == 0)
                         {
                             Console.BackgroundColor = ConsoleColor.Green;
                             Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(board[row, col]);
+                            Console.Write(TheBoard[row, col]);
                             Console.ResetColor();
                         }
                         else if (col % 2 != 0)
                         {
-                            Console.Write(board[row, col]);
+                            Console.Write(TheBoard[row, col]);
                         }
                     }
                     else
                     {
-                        Console.Write(board[row, col]);
+                        Console.Write(TheBoard[row, col]);
                     }
                 }
 

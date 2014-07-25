@@ -1,0 +1,9 @@
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\KingSurvival2Game.Tests.dll
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\KingSurvival2Game.Tests.pdb
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\KingSurvival2Game.Tests.dll.CodeAnalysisLog.xml
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\KingSurvival2Game.Tests.dll.lastcodeanalysissucceeded
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\ConsoleApplication1.exe
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\obj\Debug\KingSurvival2Game.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\obj\Debug\KingSurvival2Game.Tests.dll
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\KingSurvival2Game.Tests\obj\Debug\KingSurvival2Game.Tests.pdb

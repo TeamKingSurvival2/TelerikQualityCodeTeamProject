@@ -1,13 +1,17 @@
-﻿namespace KingSurvivalGame
+﻿// <copyright file="Piece.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+// <author>King Survival 2 Team</author>
+namespace KingSurvivalGame
 {
-    using System;
-    using System.Linq;
-
+    /// <summary>
+    /// Defines the pieces.
+    /// </summary>
     public class Piece
     {
         /// <summary>
-        /// Creates an instance of this class King with it's position.
+        /// Initializes a new instance of the <see cref="Piece"/> class.Creates an instance of this class King with it's position.
         /// </summary>
+        /// <param name="name">The piece name.</param>
+        /// <param name="position">The piece position.</param>
         public Piece(string name, Coordinates position)
         {
             this.Name = name;
@@ -22,6 +26,6 @@
         /// <summary>
         /// Gets or sets the Piece's name.
         /// </summary>
-        public string Name { get; set; }
+        private string Name { get; set; }
     }
 }

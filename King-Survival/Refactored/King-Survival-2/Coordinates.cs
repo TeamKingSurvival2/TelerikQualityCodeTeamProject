@@ -1,65 +1,32 @@
-﻿namespace KingSurvivalGame
+﻿// <copyright file="Coordinates.cs" company="www.telerikacademy.com">for educational purposes only</copyright>
+// <author>King Survival 2 Team</author>
+namespace KingSurvivalGame
 {
-    using System;
-    using System.Linq;
-
     /// <summary>
     /// Holds information about the coordinates of each element.
     /// </summary>
     public class Coordinates
     {
         /// <summary>
-        /// The X coordinate.
-        /// </summary>
-        private int xCoord;
-
-        /// <summary>
-        /// The Y coordinate.
-        /// </summary>
-        private int yCoord;
-
-        /// <summary>
-        /// Initializes a new instance of the object with the designated coordinates.
+        /// Initializes a new instance of the <see cref="Coordinates"/> class.Initializes a new instance of the object with the designated coordinates.
         /// </summary>
         /// <param name="y">The Y coordinate.</param>
         /// <param name="x">The X coordinate.</param>
         public Coordinates(int y, int x)
         {
-            this.yCoord = y;
-            this.xCoord = x;
+            this.YCoord = y;
+            this.XCoord = x;
         }
 
         /// <summary>
-        /// Gets or sets the X coordinate.
+        /// Gets the X coordinate.
         /// </summary>
-        public int XCoord
-        {
-            get
-            {
-                return this.xCoord;
-            }
-
-            set
-            {
-                this.xCoord = value;
-            }
-        }
+        public int XCoord { get; private set; }
 
         /// <summary>
-        /// Gets or sets the Y coordinate.
+        /// Gets the Y coordinate.
         /// </summary>
-        public int YCoord
-        {
-            get
-            {
-                return this.yCoord;
-            }
-
-            set
-            {
-                this.yCoord = value;
-            }
-        }
+        public int YCoord { get; private set; }
 
         /// <summary>
         /// Compares two coordinates. Returns true if they are equal, and false if they're not equal.
@@ -69,7 +36,7 @@
         /// <returns>A boolean value, indicating whether both coordinates are equal.</returns>
         public static bool operator ==(Coordinates first, Coordinates second)
         {
-            return first.Equals(second);
+            return first != null && first.Equals(second);
         }
 
         /// <summary>
@@ -80,7 +47,7 @@
         /// <returns>A boolean value, indicating whether both coordinates are not equal.</returns>
         public static bool operator !=(Coordinates first, Coordinates second)
         {
-            return !first.Equals(second);
+            return first != null && !first.Equals(second);
         }
 
         /// <summary>
@@ -101,15 +68,15 @@
         /// <returns>A boolean value, indicating whether the coordinates are equal.</returns>
         public override bool Equals(object obj)
         {
-            Coordinates objAsMatrixCoords = obj as Coordinates;
+            var objAsMatrixCoords = obj as Coordinates;
 
             if (obj == null)
             {
                 return false;
             }
 
-            return (this.XCoord == objAsMatrixCoords.XCoord) &&
-                   (this.YCoord == objAsMatrixCoords.YCoord);
+            return objAsMatrixCoords != null && ((this.XCoord == objAsMatrixCoords.XCoord) &&
+                                                 (this.YCoord == objAsMatrixCoords.YCoord));
         }
     }
 }

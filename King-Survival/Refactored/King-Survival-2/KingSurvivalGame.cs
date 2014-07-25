@@ -5,45 +5,13 @@ namespace KingSurvivalGame
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Globalization;
 
     /// <summary>
     /// contains the refactored King Survival Game (work in progress)
     /// </summary>
     public static class KingSurvivalGame
     {
-        /// <summary>
-        /// coordinates of king position.
-        /// </summary>
-        private static Piece king = new Piece("King", new Coordinates(9, 10));
-
-        /// <summary>
-        /// array of pawns.
-        /// </summary>
-        private static Piece[] pawns = new Piece[4]
-        {
-            new Piece("A", new Coordinates(2, 4)), 
-            new Piece("B", new Coordinates(2, 8)), 
-            new Piece("C", new Coordinates(2, 12)), 
-            new Piece("D", new Coordinates(2, 16)),         
-        };
-
-        /// <summary>
-        /// existing moves for the king
-        /// </summary>
-        private static bool[] kingExistingMoves = { true, true, true, true };
-
-        /// <summary>
-        /// existing moves for pawns
-        /// </summary>
-        private static bool[,] pawnExistingMoves = 
-        {
-            { true, true }, 
-            { true, true }, 
-            { true, true },
-            { true, true }            
-        };
-
         /// <summary>
         /// contains all valid input strings for the king.
         /// </summary>
@@ -55,25 +23,65 @@ namespace KingSurvivalGame
         private static readonly string[] ValidPawnInputs = { "DL", "DR" };
 
         /// <summary>
+        /// coordinates of king position.
+        /// </summary>
+        private static readonly Piece King = new Piece("King", new Coordinates(9, 10));
+
+        /// <summary>
+        /// array of pawns.
+        /// </summary>
+        private static readonly Piece[] Pawns =
+        {
+            new Piece("A", new Coordinates(2, 4)), 
+            new Piece("B", new Coordinates(2, 8)), 
+            new Piece("C", new Coordinates(2, 12)), 
+            new Piece("D", new Coordinates(2, 16))
+        };
+
+        /// <summary>
+        /// existing moves for the king
+        /// </summary>
+        private static readonly bool[] KingExistingMoves = { true, true, true, true };
+
+        /// <summary>
+        /// existing moves for pawns
+        /// </summary>
+        private static readonly bool[,] PawnExistingMoves = 
+        {
+            { true, true }, 
+            { true, true }, 
+            { true, true },
+            { true, true }            
+        };
+
+        /// <summary>
         /// Counter of number of movements.
         /// </summary>
-        private static int movementsCounter = 0;
+        private static int movementsCounter;
 
         /// <summary>
         /// holds game completion state
         /// </summary>
-        private static bool gameIsFinished = false;
+        private static bool gameIsFinished;
+
+        /// <summary>
+        /// contains main executable program logic
+        /// </summary>
+        public static void Main()
+        {
+            InteractWithUser(movementsCounter);
+            Console.WriteLine("\nThank you for playing this game!\n\n");
+        }
 
         /// <summary>
         /// interaction with user.
         /// </summary>
         /// <param name="turnCounter">Counter of which pieces turn is.</param>
-        public static void InteractWithUser(int turnCounter)
+        private static void InteractWithUser(int turnCounter)
         {
             if (gameIsFinished)
             {
                 Console.WriteLine("G-A-M-E- -O-V-E-R");
-                return;
             }
             else
             {
@@ -90,71 +98,129 @@ namespace KingSurvivalGame
             }
         }
 
-        /// <summary>
-        /// execute the king's turn
+       /// <summary>
+        /// validates turn and executes it
         /// </summary>
-        private static void ProcessKingSide()
+        /// <param name="checkedInput">input parameter</param>
+        /// <returns>a boolean true/false value</returns>
+       private static bool CheckAndExecuteTurn(string checkedInput)
         {
-            bool isExecuted = false;
-            while (!isExecuted)
+            bool validCommand = IsValidCommand(checkedInput);
+            if (validCommand)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.Write("Please enter king's turn: ");
-                Console.ResetColor();
-                string input = Console.ReadLine();
-                if (input != null && (input != "/n"))
+                Coordinates oldCoordinates;
+                Coordinates coords;
+
+                char startLetter = checkedInput[0];
+                switch (startLetter)
                 {
-                    input = input.ToUpper();
-                    isExecuted = CheckAndExecuteTurn(input);
-                }
-                else
-                {
-                    isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
-                    Console.ResetColor();
+                    case 'A':
+                        if (checkedInput[2] == 'L')
+                        {
+                            oldCoordinates = Pawns[0].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[0].Position = coords;
+                            }
+                        }
+                        else
+                        {
+                            oldCoordinates = Pawns[0].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[0].Position = coords;
+                            }
+                        }
+
+                        return true;
+
+                    case 'B':
+                        if (checkedInput[2] == 'L')
+                        {
+                            oldCoordinates = Pawns[1].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
+
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[1].Position = coords;
+                            }
+                        }
+                        else
+                        {
+                            oldCoordinates = Pawns[1].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
+
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[1].Position = coords;
+                            }
+                        }
+
+                        return true;
+
+                    case 'C':
+                        if (checkedInput[2] == 'L')
+                        {
+                            oldCoordinates = Pawns[2].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[2].Position = coords;
+                            }
+                        }
+                        else
+                        {
+                            oldCoordinates = Pawns[2].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[2].Position = coords;
+                            }
+                        }
+
+                        return true;
+
+                    case 'D':
+                        if (checkedInput[2] == 'L')
+                        {
+                            oldCoordinates = Pawns[3].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
+
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[3].Position = coords;
+                            }
+                        }
+                        else
+                        {
+                            oldCoordinates = Pawns[3].Position;
+                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
+                            if (coords.XCoord != 0 && coords.YCoord != 0)
+                            {
+                                Pawns[3].Position = coords;
+                            }
+                        }
+
+                        return true;
+                    case 'K':
+                        oldCoordinates = King.Position;
+                        string command = checkedInput.Substring(1);
+                        coords = CheckNextKingPosition(oldCoordinates, command);
+                        if (coords.XCoord != 0 && coords.YCoord != 0)
+                        {
+                            King.Position = coords;
+                        }
+
+                        return true;
+
+                    default: Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!");
+                        return false;
                 }
             }
 
-            InteractWithUser(movementsCounter);
-        }
-
-        /// <summary>
-        /// process a pawn's turn
-        /// </summary>
-        private static void ProcessPawnSide()
-        {
-            bool isExecuted = false;
-            while (!isExecuted)
-            {
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.Write("Please enter pawn's turn: ");
-                Console.ResetColor();
-                string input = Console.ReadLine();
-                if ((input != null) && (input != "/n"))
-                {
-                    input = input.ToUpper();
-                    isExecuted = CheckAndExecuteTurn(input);
-                }
-                else
-                {
-                    isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
-                    Console.ResetColor();
-                }
-            }
-
-            InteractWithUser(movementsCounter);
-        }
-
-        /// <summary>
-        /// contains main executable program logic
-        /// </summary>
-        public static void Main()
-        {
-            InteractWithUser(movementsCounter);
-            Console.WriteLine("\nThank you for playing this game!\n\n");
+           return false;
         }
 
         /// <summary>
@@ -166,11 +232,11 @@ namespace KingSurvivalGame
         {
             if (movementsCounter % 2 == 0)
             {
-                int[] equal = new int[4];
+                var equal = new int[4];
                 for (int i = 0; i < ValidKingInputs.Length; i++)
                 {
                     string reference = "K" + ValidKingInputs[i];
-                    int result = checkedString.CompareTo(reference);
+                    int result = String.Compare(checkedString, reference, StringComparison.Ordinal);
                     if (result != 0)
                     {
                         equal[i] = 0;
@@ -202,15 +268,15 @@ namespace KingSurvivalGame
             else
             {
                 char startLetter = checkedString[0];
-                int[] equal = new int[2];
+                var equal = new int[2];
                 bool hasAnEqual = false;
                 if (startLetter == 'A' || startLetter == 'B' || startLetter == 'C' || startLetter == 'D')
                 {
                     for (int i = 0; i < ValidPawnInputs.Length; i++)
                     {
-                        string reference = startLetter.ToString() + ValidPawnInputs[i];
+                        string reference = startLetter + ValidPawnInputs[i];
 
-                        int result = checkedString.CompareTo(reference);
+                        int result = String.Compare(checkedString, reference, StringComparison.Ordinal);
 
                         if (result != 0)
                         {
@@ -243,130 +309,59 @@ namespace KingSurvivalGame
         }
 
         /// <summary>
-        /// validates turn and executes it
+        /// execute the king's turn
         /// </summary>
-        /// <param name="checkedInput">input parameter</param>
-        /// <returns>a boolean true/false value</returns>
-        public static bool CheckAndExecuteTurn(string checkedInput)
+        private static void ProcessKingSide()
         {
-            bool validCommand = IsValidCommand(checkedInput);
-            if (validCommand)
+            bool isExecuted = false;
+            while (!isExecuted)
             {
-                Coordinates oldCoordinates = new Coordinates(0, 0);
-                Coordinates coords = new Coordinates(0, 0);
-
-                char startLetter = checkedInput[0];
-                switch (startLetter)
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                Console.Write("Please enter king's turn: ");
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (input != null && (input != "/n"))
                 {
-                    case 'A':
-                        if (checkedInput[2] == 'L')
-                        {
-                            oldCoordinates = pawns[0].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[0].Position = coords;
-                            }
-                        }
-                        else
-                        {
-                            oldCoordinates = pawns[0].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[0].Position = coords;
-                            }
-                        }
-
-                        return true;
-
-                    case 'B':
-                        if (checkedInput[2] == 'L')
-                        {
-                            oldCoordinates = pawns[1].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
-
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[1].Position = coords;
-                            }
-                        }
-                        else
-                        {
-                            oldCoordinates = pawns[1].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
-
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[1].Position = coords;
-                            }
-                        }
-
-                        return true;
-
-                    case 'C':
-                        if (checkedInput[2] == 'L')
-                        {
-                            oldCoordinates = pawns[2].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[2].Position = coords;
-                            }
-                        }
-                        else
-                        {
-                            oldCoordinates = pawns[2].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[2].Position = coords;
-                            }
-                        }
-
-                        return true;
-
-                    case 'D':
-                        if (checkedInput[2] == 'L')
-                        {
-                            oldCoordinates = pawns[3].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
-
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[3].Position = coords;
-                            }
-                        }
-                        else
-                        {
-                            oldCoordinates = pawns[3].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
-                            if (coords.XCoord != 0 && coords.YCoord != 0)
-                            {
-                                pawns[3].Position = coords;
-                            }
-                        }
-
-                        return true;
-                    case 'K':
-                        oldCoordinates = king.Position;
-                        string command = checkedInput.Substring(1);
-                        coords = CheckNextKingPosition(oldCoordinates, command);
-                        if (coords.XCoord != 0 && coords.YCoord != 0)
-                        {
-                            king.Position = coords;
-                        }
-
-                        return true;
-
-                    default: Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!");
-                        return false;
+                    input = input.ToUpper();
+                    isExecuted = CheckAndExecuteTurn(input);
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Please enter something!");
+                    Console.ResetColor();
                 }
             }
-            else
+
+            InteractWithUser(movementsCounter);
+        }
+
+        /// <summary>
+        /// process a pawn's turn
+        /// </summary>
+        private static void ProcessPawnSide()
+        {
+            bool isExecuted = false;
+            while (!isExecuted)
             {
-                return false;
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.Write("Please enter pawn's turn: ");
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if ((input != null) && (input != "/n"))
+                {
+                    input = input.ToUpper();
+                    isExecuted = CheckAndExecuteTurn(input);
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Please enter something!");
+                    Console.ResetColor();
+                }
             }
+
+            InteractWithUser(movementsCounter);
         }
 
         /// <summary>
@@ -392,16 +387,13 @@ namespace KingSurvivalGame
         /// <returns>new coordinates</returns>
         private static Coordinates CheckNextPownPosition(Coordinates currentCoordinates, char checkDirection, char currentPawn)
         {
-            Coordinates displasmentDownLeft = new Coordinates(1, -2);
-            Coordinates displasmentDownRight = new Coordinates(1, 2);
-            Dictionary<char, Coordinates> directions = new Dictionary<char, Coordinates>();
-            directions.Add('L', displasmentDownLeft);
-            directions.Add('R', displasmentDownRight);
+            var displasmentDownLeft = new Coordinates(1, -2);
+            var displasmentDownRight = new Coordinates(1, 2);
+            var directions = new Dictionary<char, Coordinates> { { 'L', displasmentDownLeft }, { 'R', displasmentDownRight } };
 
-            Coordinates newCoords = new Coordinates(0, 0);
-            newCoords = currentCoordinates + directions[checkDirection];
-            Console.WriteLine(directions[checkDirection].XCoord.ToString());
-            Console.WriteLine(newCoords.YCoord.ToString() + newCoords.XCoord.ToString());
+            Coordinates newCoords = currentCoordinates + directions[checkDirection];
+            Console.WriteLine(directions[checkDirection].XCoord.ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine(newCoords.YCoord.ToString(CultureInfo.InvariantCulture) + newCoords.XCoord.ToString(CultureInfo.InvariantCulture));
             Console.WriteLine(BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords));
             if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] == ' ')
             {
@@ -412,22 +404,22 @@ namespace KingSurvivalGame
                 switch (currentPawn)
                 {
                     case 'A':
-                        pawnExistingMoves[0, 0] = true;
-                        pawnExistingMoves[0, 1] = true;
+                        PawnExistingMoves[0, 0] = true;
+                        PawnExistingMoves[0, 1] = true;
                         break;
 
                     case 'B':
-                        pawnExistingMoves[1, 0] = true;
-                        pawnExistingMoves[1, 1] = true;
+                        PawnExistingMoves[1, 0] = true;
+                        PawnExistingMoves[1, 1] = true;
                         break;
                     case 'C':
-                        pawnExistingMoves[2, 0] = true;
-                        pawnExistingMoves[2, 1] = true;
+                        PawnExistingMoves[2, 0] = true;
+                        PawnExistingMoves[2, 1] = true;
                         break;
 
                     case 'D':
-                        pawnExistingMoves[3, 0] = true;
-                        pawnExistingMoves[3, 1] = true;
+                        PawnExistingMoves[3, 0] = true;
+                        PawnExistingMoves[3, 1] = true;
                         break;
 
                     default:
@@ -437,57 +429,55 @@ namespace KingSurvivalGame
 
                 return newCoords;
             }
-            else
+
+            bool allAreFalse = true;
+            switch (currentPawn)
             {
-                bool allAreFalse = true;
-                switch (currentPawn)
+                case 'A':
+                    PawnExistingMoves[0, 0] = false;
+                    break;
+
+                case 'B':
+                    PawnExistingMoves[1, 0] = false;
+
+                    break;
+                case 'C':
+                    PawnExistingMoves[2, 0] = false;
+
+                    break;
+
+                case 'D':
+                    PawnExistingMoves[3, 0] = false;
+                    break;
+
+                default:
+                    Console.WriteLine("ERROR!");
+                    break;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 2; j++)
                 {
-                    case 'A':
-                        pawnExistingMoves[0, 0] = false;
-                        break;
-
-                    case 'B':
-                        pawnExistingMoves[1, 0] = false;
-
-                        break;
-                    case 'C':
-                        pawnExistingMoves[2, 0] = false;
-
-                        break;
-
-                    case 'D':
-                        pawnExistingMoves[3, 0] = false;
-                        break;
-
-                    default:
-                        Console.WriteLine("ERROR!");
-                        break;
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    for (int j = 0; j < 2; j++)
+                    if (PawnExistingMoves[i, j])
                     {
-                        if (pawnExistingMoves[i, j] == true)
-                        {
-                            allAreFalse = false;
-                        }
+                        allAreFalse = false;
                     }
                 }
-
-                if (allAreFalse)
-                {
-                    gameIsFinished = true;
-                    Console.WriteLine("King wins!");
-                    gameIsFinished = true;
-                    return null;
-                }
-
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("You can't go in this direction! ");
-                Console.ResetColor();
-                return new Coordinates(0, 0);
             }
+
+            if (allAreFalse)
+            {
+                gameIsFinished = true;
+                Console.WriteLine("King wins!");
+                gameIsFinished = true;
+                return null;
+            }
+
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("You can't go in this direction! ");
+            Console.ResetColor();
+            return new Coordinates(0, 0);
         }
 
         /// <summary>
@@ -498,20 +488,20 @@ namespace KingSurvivalGame
         /// <returns>new coordinates</returns>
         private static Coordinates CheckNextKingPosition(Coordinates currentCoordinates, string inputDirection)
         {
-            Coordinates displasmentDownLeft = new Coordinates(1, -2);
-            Coordinates displasmentDownRight = new Coordinates(1, 2);
-            Coordinates displasmentUpLeft = new Coordinates(-1, -2);
-            Coordinates displasmentUpRight = new Coordinates(-1, 2);
+            var displasmentDownLeft = new Coordinates(1, -2);
+            var displasmentDownRight = new Coordinates(1, 2);
+            var displasmentUpLeft = new Coordinates(-1, -2);
+            var displasmentUpRight = new Coordinates(-1, 2);
 
-            Dictionary<string, Coordinates> directions = new Dictionary<string, Coordinates>();
-            directions.Add("UL", displasmentUpLeft);
-            directions.Add("UR", displasmentUpRight);
-            directions.Add("DL", displasmentDownLeft);
-            directions.Add("DR", displasmentDownRight);
+            var directions = new Dictionary<string, Coordinates>
+            {
+                { "UL", displasmentUpLeft },
+                { "UR", displasmentUpRight },
+                { "DL", displasmentDownLeft },
+                { "DR", displasmentDownRight }
+            };
 
-            Coordinates newCoords = new Coordinates(0, 0);
-
-            newCoords = currentCoordinates + directions[inputDirection];
+            Coordinates newCoords = currentCoordinates + directions[inputDirection];
             if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] == ' ')
             {
                 char sign = BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord];
@@ -520,36 +510,34 @@ namespace KingSurvivalGame
                 movementsCounter++;
                 for (int i = 0; i < 4; i++)
                 {
-                    kingExistingMoves[i] = true;
+                    KingExistingMoves[i] = true;
                 }
 
                 CheckForKingExit(newCoords.YCoord);
                 return newCoords;
             }
-            else
+
+            KingExistingMoves[0] = false;
+            bool allAreFalse = true;
+            for (int i = 0; i < 4; i++)
             {
-                kingExistingMoves[0] = false;
-                bool allAreFalse = true;
-                for (int i = 0; i < 4; i++)
+                if (KingExistingMoves[i])
                 {
-                    if (kingExistingMoves[i] == true)
-                    {
-                        allAreFalse = false;
-                    }
+                    allAreFalse = false;
                 }
-
-                if (allAreFalse)
-                {
-                    gameIsFinished = true;
-                    Console.WriteLine("King loses!");
-                    return null;
-                }
-
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("You can't go in this direction! ");
-                Console.ResetColor();
-                return new Coordinates(0, 0);
             }
+
+            if (allAreFalse)
+            {
+                gameIsFinished = true;
+                Console.WriteLine("King loses!");
+                return null;
+            }
+
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("You can't go in this direction! ");
+            Console.ResetColor();
+            return new Coordinates(0, 0);
         }
     }
 }

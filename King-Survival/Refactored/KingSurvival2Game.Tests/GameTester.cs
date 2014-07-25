@@ -3,9 +3,7 @@
 
 namespace KingSurvival2Game.Tests
 {
-    using System;
-    using KingSurvival2Game;
-    //using Microsoft.VisualStudio.QualityTools.UnitTestFramework;
+//using Microsoft.VisualStudio.QualityTools.UnitTestFramework;
     using Microsoft.VisualStudio.TestTools.UnitTesting;         
 
     /// <summary>

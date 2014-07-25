@@ -8,3 +8,8 @@ C:\Users\Kiril\Desktop\Refactored\King-Survival-2\obj\Debug\ConsoleApplication1.
 C:\Users\Kiril\Desktop\Refactored\King-Survival-2\obj\Debug\KingSurvival2Game.csprojResolveAssemblyReference.cache
 C:\Users\Kiril\Desktop\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.exe
 C:\Users\Kiril\Desktop\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\ConsoleApplication1.exe
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.exe
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Konstantin\Documents\GitHub\TelerikQualityCodeTeamProject\King-Survival\Refactored\King-Survival-2\obj\Debug\KingSurvival2Game.csprojResolveAssemblyReference.cache
