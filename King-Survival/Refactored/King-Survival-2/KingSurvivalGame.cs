@@ -13,6 +13,16 @@ namespace KingSurvivalGame
     public static class KingSurvivalGame
     {
         /// <summary>
+        /// Counter of number of movements.
+        /// </summary>
+        internal static int MovementsCounter;
+
+        /// <summary>
+        /// holds game completion state
+        /// </summary>
+        internal static bool GameIsFinished;
+
+        /// <summary>
         /// contains all valid input strings for the king.
         /// </summary>
         private static readonly string[] ValidKingInputs = { "UL", "UR", "DL", "DR" };
@@ -39,37 +49,11 @@ namespace KingSurvivalGame
         };
 
         /// <summary>
-        /// existing moves for the king
-        /// </summary>
-        private static readonly bool[] KingExistingMoves = { true, true, true, true };
-
-        /// <summary>
-        /// existing moves for pawns
-        /// </summary>
-        private static readonly bool[,] PawnExistingMoves = 
-        {
-            { true, true }, 
-            { true, true }, 
-            { true, true },
-            { true, true }            
-        };
-
-        /// <summary>
-        /// Counter of number of movements.
-        /// </summary>
-        private static int movementsCounter;
-
-        /// <summary>
-        /// holds game completion state
-        /// </summary>
-        private static bool gameIsFinished;
-
-        /// <summary>
         /// contains main executable program logic
         /// </summary>
         public static void Main()
         {
-            InteractWithUser(movementsCounter);
+            InteractWithUser(MovementsCounter);
             Console.WriteLine("\nThank you for playing this game!\n\n");
         }
 
@@ -79,7 +63,7 @@ namespace KingSurvivalGame
         /// <param name="turnCounter">Counter of which pieces turn is.</param>
         private static void InteractWithUser(int turnCounter)
         {
-            if (gameIsFinished)
+            if (GameIsFinished)
             {
                 Console.WriteLine("G-A-M-E- -O-V-E-R");
             }
@@ -87,12 +71,12 @@ namespace KingSurvivalGame
             {
                 if (turnCounter % 2 == 0)
                 {
-                    BoardRenderer.DisplayBoard();
+                    BoardDisplay.DisplayBoard();
                     ProcessKingSide();
                 }
                 else
                 {
-                    BoardRenderer.DisplayBoard();
+                    BoardDisplay.DisplayBoard();
                     ProcessPawnSide();
                 }
             }
@@ -118,7 +102,7 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             oldCoordinates = Pawns[0].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'L', 'A');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 Pawns[0].Position = coords;
@@ -127,7 +111,7 @@ namespace KingSurvivalGame
                         else
                         {
                             oldCoordinates = Pawns[0].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'R', 'A');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 Pawns[0].Position = coords;
@@ -140,7 +124,7 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             oldCoordinates = Pawns[1].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'L', 'B');
 
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
@@ -150,7 +134,7 @@ namespace KingSurvivalGame
                         else
                         {
                             oldCoordinates = Pawns[1].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'R', 'B');
 
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
@@ -164,7 +148,7 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             oldCoordinates = Pawns[2].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'L', 'C');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 Pawns[2].Position = coords;
@@ -173,7 +157,7 @@ namespace KingSurvivalGame
                         else
                         {
                             oldCoordinates = Pawns[2].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'R', 'C');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 Pawns[2].Position = coords;
@@ -186,7 +170,7 @@ namespace KingSurvivalGame
                         if (checkedInput[2] == 'L')
                         {
                             oldCoordinates = Pawns[3].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'L', 'D');
 
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
@@ -196,7 +180,7 @@ namespace KingSurvivalGame
                         else
                         {
                             oldCoordinates = Pawns[3].Position;
-                            coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
+                            coords = PawnsPositioning.CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords.XCoord != 0 && coords.YCoord != 0)
                             {
                                 Pawns[3].Position = coords;
@@ -207,7 +191,7 @@ namespace KingSurvivalGame
                     case 'K':
                         oldCoordinates = King.Position;
                         string command = checkedInput.Substring(1);
-                        coords = CheckNextKingPosition(oldCoordinates, command);
+                        coords = KingPositioning.CheckNextKingPosition(oldCoordinates, command);
                         if (coords.XCoord != 0 && coords.YCoord != 0)
                         {
                             King.Position = coords;
@@ -230,7 +214,7 @@ namespace KingSurvivalGame
         /// <returns>a true/false boolean value</returns>
         private static bool IsValidCommand(string checkedString)
         {
-            if (movementsCounter % 2 == 0)
+            if (MovementsCounter % 2 == 0)
             {
                 var equal = new int[4];
                 for (int i = 0; i < ValidKingInputs.Length; i++)
@@ -333,7 +317,7 @@ namespace KingSurvivalGame
                 }
             }
 
-            InteractWithUser(movementsCounter);
+            InteractWithUser(MovementsCounter);
         }
 
         /// <summary>
@@ -361,183 +345,7 @@ namespace KingSurvivalGame
                 }
             }
 
-            InteractWithUser(movementsCounter);
-        }
-
-        /// <summary>
-        /// checks if king is able to make a move
-        /// </summary>
-        /// <param name="currentKingXAxe">parameter integer</param>
-        private static void CheckForKingExit(int currentKingXAxe)
-        {
-            if (currentKingXAxe == 2)
-            {
-                Console.WriteLine("End!");
-                Console.WriteLine("King wins in {0} moves!", movementsCounter / 2);
-                gameIsFinished = true;
-            }
-        }
-
-        /// <summary>
-        /// check the next possible move of a pawn
-        /// </summary>
-        /// <param name="currentCoordinates">current pawn coordinates</param>
-        /// <param name="checkDirection">direction to check</param>
-        /// <param name="currentPawn">pawn parameter</param>
-        /// <returns>new coordinates</returns>
-        private static Coordinates CheckNextPownPosition(Coordinates currentCoordinates, char checkDirection, char currentPawn)
-        {
-            var displasmentDownLeft = new Coordinates(1, -2);
-            var displasmentDownRight = new Coordinates(1, 2);
-            var directions = new Dictionary<char, Coordinates> { { 'L', displasmentDownLeft }, { 'R', displasmentDownRight } };
-
-            Coordinates newCoords = currentCoordinates + directions[checkDirection];
-            Console.WriteLine(directions[checkDirection].XCoord.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine(newCoords.YCoord.ToString(CultureInfo.InvariantCulture) + newCoords.XCoord.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine(BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords));
-            if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] == ' ')
-            {
-                char sign = BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord];
-                BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord] = ' ';
-                BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] = sign;
-                movementsCounter++;
-                switch (currentPawn)
-                {
-                    case 'A':
-                        PawnExistingMoves[0, 0] = true;
-                        PawnExistingMoves[0, 1] = true;
-                        break;
-
-                    case 'B':
-                        PawnExistingMoves[1, 0] = true;
-                        PawnExistingMoves[1, 1] = true;
-                        break;
-                    case 'C':
-                        PawnExistingMoves[2, 0] = true;
-                        PawnExistingMoves[2, 1] = true;
-                        break;
-
-                    case 'D':
-                        PawnExistingMoves[3, 0] = true;
-                        PawnExistingMoves[3, 1] = true;
-                        break;
-
-                    default:
-                        Console.WriteLine("ERROR!");
-                        break;
-                }
-
-                return newCoords;
-            }
-
-            bool allAreFalse = true;
-            switch (currentPawn)
-            {
-                case 'A':
-                    PawnExistingMoves[0, 0] = false;
-                    break;
-
-                case 'B':
-                    PawnExistingMoves[1, 0] = false;
-
-                    break;
-                case 'C':
-                    PawnExistingMoves[2, 0] = false;
-
-                    break;
-
-                case 'D':
-                    PawnExistingMoves[3, 0] = false;
-                    break;
-
-                default:
-                    Console.WriteLine("ERROR!");
-                    break;
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    if (PawnExistingMoves[i, j])
-                    {
-                        allAreFalse = false;
-                    }
-                }
-            }
-
-            if (allAreFalse)
-            {
-                gameIsFinished = true;
-                Console.WriteLine("King wins!");
-                gameIsFinished = true;
-                return null;
-            }
-
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("You can't go in this direction! ");
-            Console.ResetColor();
-            return new Coordinates(0, 0);
-        }
-
-        /// <summary>
-        /// checks the next position if the king is to move
-        /// </summary>
-        /// <param name="currentCoordinates">current coordinates of the king</param>
-        /// <param name="inputDirection">current direction of the king</param>
-        /// <returns>new coordinates</returns>
-        private static Coordinates CheckNextKingPosition(Coordinates currentCoordinates, string inputDirection)
-        {
-            var displasmentDownLeft = new Coordinates(1, -2);
-            var displasmentDownRight = new Coordinates(1, 2);
-            var displasmentUpLeft = new Coordinates(-1, -2);
-            var displasmentUpRight = new Coordinates(-1, 2);
-
-            var directions = new Dictionary<string, Coordinates>
-            {
-                { "UL", displasmentUpLeft },
-                { "UR", displasmentUpRight },
-                { "DL", displasmentDownLeft },
-                { "DR", displasmentDownRight }
-            };
-
-            Coordinates newCoords = currentCoordinates + directions[inputDirection];
-            if (BoardRenderer.CheckIfCoordsAreWithinGameField(newCoords) && BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] == ' ')
-            {
-                char sign = BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord];
-                BoardRenderer.Board[currentCoordinates.YCoord, currentCoordinates.XCoord] = ' ';
-                BoardRenderer.Board[newCoords.YCoord, newCoords.XCoord] = sign;
-                movementsCounter++;
-                for (int i = 0; i < 4; i++)
-                {
-                    KingExistingMoves[i] = true;
-                }
-
-                CheckForKingExit(newCoords.YCoord);
-                return newCoords;
-            }
-
-            KingExistingMoves[0] = false;
-            bool allAreFalse = true;
-            for (int i = 0; i < 4; i++)
-            {
-                if (KingExistingMoves[i])
-                {
-                    allAreFalse = false;
-                }
-            }
-
-            if (allAreFalse)
-            {
-                gameIsFinished = true;
-                Console.WriteLine("King loses!");
-                return null;
-            }
-
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("You can't go in this direction! ");
-            Console.ResetColor();
-            return new Coordinates(0, 0);
+            InteractWithUser(MovementsCounter);
         }
     }
 }

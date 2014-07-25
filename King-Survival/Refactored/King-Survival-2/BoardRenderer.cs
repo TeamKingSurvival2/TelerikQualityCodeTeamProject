@@ -44,7 +44,7 @@ namespace KingSurvivalGame
         {
             get
             {
-                return TheBoard;
+                return BoardRenderer.TheBoard;
             }
 
 /*
@@ -83,73 +83,6 @@ namespace KingSurvivalGame
             bool isRowInBoard = (positionCoodinates.XCoord >= TheBoardCorners[0].XCoord) && (positionCoodinates.XCoord <= TheBoardCorners[1].XCoord);
             bool isColInBoard = (positionCoodinates.YCoord >= TheBoardCorners[0].YCoord) && (positionCoodinates.YCoord <= TheBoardCorners[1].YCoord);
             return isRowInBoard && isColInBoard;
-        }
-
-        /// <summary>
-        /// displays the game board on screen
-        /// </summary>
-        public static void DisplayBoard()
-        {
-            Console.WriteLine();
-            for (int row = 0; row < TheBoard.GetLength(0); row++)
-            {
-                for (int col = 0; col < TheBoard.GetLength(1); col++)
-                {
-                    var coordinates = new Coordinates(row, col);
-                    bool isCellIn = CheckIfCoordsAreWithinGameField(coordinates);
-                    if (isCellIn)
-                    {
-                        if (row % 2 == 0)
-                        {
-                            if (col % 4 == 0)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Green;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(TheBoard[row, col]);
-                                Console.ResetColor();
-                            }
-                            else if (col % 2 == 0)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Blue;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(TheBoard[row, col]);
-                                Console.ResetColor();
-                            }
-                            else if (col % 2 != 0)
-                            {
-                                Console.Write(TheBoard[row, col]);
-                            }
-                        }
-                        else if (col % 4 == 0)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(TheBoard[row, col]);
-                            Console.ResetColor();
-                        }
-                        else if (col % 2 == 0)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(TheBoard[row, col]);
-                            Console.ResetColor();
-                        }
-                        else if (col % 2 != 0)
-                        {
-                            Console.Write(TheBoard[row, col]);
-                        }
-                    }
-                    else
-                    {
-                        Console.Write(TheBoard[row, col]);
-                    }
-                }
-
-                Console.WriteLine();
-                Console.ResetColor();
-            }
-
-            Console.WriteLine();
         }
     }
 }

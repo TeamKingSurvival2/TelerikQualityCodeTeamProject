@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardDisplay.cs" />
     <Compile Include="BoardRenderer.cs" />
     <Compile Include="Coordinates.cs" />
+    <Compile Include="KingPositioning.cs" />
     <Compile Include="KingSurvivalGame.cs" />
+    <Compile Include="PawnsPositioning.cs" />
     <Compile Include="Piece.cs" />
   </ItemGroup>
   <ItemGroup>
